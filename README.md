@@ -5,6 +5,8 @@
 
 **⬇️ [下载最新版](../../releases/latest)**
 
+![小刀AI智能体定制版 · AI浏览器 MCP Server](https://github.com/AI-XiaoDao/xiaodao-ai-browser-mcp/releases/download/v1.0.5/09-banner-1200x630.png)
+
 ---
 
 ## 这是什么
@@ -129,6 +131,26 @@ send({ jsonrpc: '2.0', id: 3, method: 'tools/call',
 | 看不到 POST 请求体 | 默认网络日志只记 URL / method / status / headers，**不含 POST body**；用 Hook 注入或 `browser_network detail_enable` |
 | 连不上、报 `ECONNREFUSED` | 你看的是旧文档：`mcp_bridge.js` 与端口接入方式**均已废弃**，现行版本不监听任何端口 |
 | 窗口隐藏后 `mouse_move` 变慢 | 正常：窗口不可见时渲染器被后台化节流，`browser_show_window {visible:true}` 即恢复 |
+
+---
+
+## 🎨 宣传素材（可自由取用）
+
+全套宣传图已随 [Releases](../../releases/latest) 一并提供，可直接下载用于推广：
+
+| 附件 | 说明 |
+|---|---|
+| `01-poster-1080x1620.png` | 主海报（六大卖点） |
+| `02`–`07-card-*.png` | 六张单点卖点卡（1080×1080） |
+| **`08-industries-poster-1080x1620.png`** | **行业版海报** —— 22 个行业，主打「各行各业都能上手」 |
+| `09-banner-1200x630.png` | 横版横幅（公众号头图 / 视频封面） |
+| `10-six-points-grid-1092x1632.png` | 六大卖点拼图（2×3） |
+
+下载地址形如：
+
+```
+https://github.com/AI-XiaoDao/xiaodao-ai-browser-mcp/releases/download/v1.0.5/<附件名>
+```
 
 ---
 
