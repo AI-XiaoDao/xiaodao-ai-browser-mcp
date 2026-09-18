@@ -44,7 +44,6 @@ jobs:
   # 行为回归：下载 x64 成品跑协议套件（advisory，待 CI 稳定后再转为必需）
   behaviour:
     runs-on: windows-latest
-    timeout-minutes: 15
     needs: checksums
     continue-on-error: true
     timeout-minutes: 12
