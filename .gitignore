@@ -1,0 +1,9 @@
+# 大体积成品不入库（走 GitHub Releases）
+*.zip
+*.7z
+!assets/*.zip
+# 运行时产物
+mcp_cache.db*
+*.quarantine_*
+mcp_console.log
+CacheData/

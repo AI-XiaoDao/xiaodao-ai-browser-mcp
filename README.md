@@ -38,3 +38,16 @@ CL 失配两向、工作池饱和读线程快答（`tools/list` 94ms，修前 11
 - exe **未做代码签名**（SmartScreen 会提示）· no code signing yet
 - 缓存库"内容型"毒化触发条件不可构造，仅有启发式安全网 · cache-DB content-poisoning has no reproducible trigger (heuristic net only)
 - 非 `tools/call` 的 `initialize`/`workflow_stop` 在全忙期仍入队（有界延迟，不丢请求）· those still queue while the worker pool is saturated (bounded, never dropped)
+
+## 仓库结构 / Repository layout
+
+```nREADME.md                  本文件（中英双语）
+docs/QUICKSTART_ZH.md     快速上手（中文）
+docs/QUICKSTART_EN.md     Quick Start (English)
+docs/CHANGELOG.md         更新日志
+docs/VERIFICATION.md      验收事实（机对机证据）
+docs/KNOWN-LIMITS.md      已知边界
+examples/mcp_config.example.json  客户端配置示例（含 UTF-8 开关）
+assets/                    图标与预览图
+```n
+> 二进制成品不进入 Git 历史，全部随 [Releases](../../releases) 分发。

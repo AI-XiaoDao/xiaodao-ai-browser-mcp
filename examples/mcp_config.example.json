@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ai-browser": {
+      "command": "C:/path/to/AI-Fbowser-Mcp.exe",
+      "args": ["--mcp-stdio"],
+      "env": {
+        "AI_BROWSER_MCP_STDERR_UTF8": "1"
+      }
+    }
+  }
+}
