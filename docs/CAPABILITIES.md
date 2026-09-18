@@ -1,38 +1,490 @@
 # 能力清单 / Capabilities
 
-> 工具总数 **348**（	ools/list 实测计数）。下表按域归类，工具名均取自工程自带的《MCP工具配置说明书》。
+**工具总数：348**（由发布版二进制 `tools/list` **实际导出**，非人工罗列）。
 
-## 浏览器核心（导航 / 读取 / 交互）
-rowser_navigate · rowser_get_url · rowser_get_title · rowser_get_text · rowser_get_html · rowser_extract · rowser_snapshot
-rowser_click · rowser_click_text · rowser_fill_form · rowser_dom_*（query/click/set_value/rect/inner_html/get_html/select/selected/checked） · rowser_find · rowser_scroll_by · rowser_get_scroll
-rowser_back / rowser_forward / rowser_reload / rowser_stop / rowser_set_zoom / rowser_set_focus / rowser_set_mute / rowser_print / rowser_print_to_pdf / rowser_screenshot
+## 按域统计（实测计数，仅列 ≥3 个工具的域）
+| 域（工具名前缀） | 数量 |
+|---|---:|
+| `browser_vip_*` | 56 |
+| `browser_reverse_*` | 55 |
+| `browser_get_*` | 20 |
+| `browser_fingerprint_*` | 19 |
+| `browser_kernel_*` | 17 |
+| `browser_debugger_*` | 17 |
+| `browser_fill_*` | 12 |
+| `browser_dom_*` | 10 |
+| `browser_set_*` | 10 |
+| `browser_edit_*` | 7 |
+| `browser_is_*` | 4 |
+| `browser_ipc_*` | 4 |
+| `browser_frame_*` | 3 |
+| `browser_find_*` | 3 |
+| `browser_mouse_*` | 3 |
+| `browser_close_*` | 3 |
+| `browser_network_*` | 3 |
+| `browser_cdp_*` | 3 |
+| `browser_touch_*` | 3 |
+| `browser_clear_*` | 3 |
+| `browser_create_*` | 3 |
 
-## 标签页与浏览器实例
-rowser_create · rowser_create_tab · rowser_list · rowser_by_id · rowser_by_index · rowser_close / rowser_close_try · rowser_count · rowser_status · rowser_window_info · rowser_show_window · rowser_move_window
+## 全量工具名（字母序，348 个）
+```
+aliases
+aliases=1
+batch
+batch=1
+browser_aliases
+browser_aliases=1
+browser_antidetect_presets
+browser_antidetect=1
+browser_back
+browser_back=1
+browser_base64_decode
+browser_base64_encode
+browser_base64=2
+browser_batch
+browser_batch=1
+browser_by_id
+browser_by_index
+browser_by=2
+browser_cache_dir
+browser_cache=1
+browser_can_navigate
+browser_can=1
+browser_canvas_noise
+browser_canvas=1
+browser_cdp
+browser_cdp_call
+browser_cdp_event
+browser_cdp=3
+browser_clear_cache
+browser_clear_cache_browser
+browser_clear_proxy
+browser_clear=3
+browser_click_text
+browser_click=1
+browser_close
+browser_close_devtools
+browser_close_try
+browser_close=3
+browser_codec
+browser_codec=1
+browser_collect
+browser_collect=1
+browser_compress_memory
+browser_compress=1
+browser_console_eval
+browser_console=1
+browser_context_menu
+browser_context=1
+browser_count
+browser_count=1
+browser_create
+browser_create_tab
+browser_create_url_request
+browser_create=3
+browser_data_uri
+browser_data=1
+browser_debugger_auto
+browser_debugger_clear_breakpoints
+browser_debugger_enable
+browser_debugger_evaluate
+browser_debugger_flow
+browser_debugger_inspect
+browser_debugger_last_paused
+browser_debugger_list_breakpoints
+browser_debugger_pause
+browser_debugger_resume
+browser_debugger_script_source
+browser_debugger_set_breakpoint
+browser_debugger_stack
+browser_debugger_step_into
+browser_debugger_step_out
+browser_debugger_step_over
+browser_debugger_wait_paused
+browser_debugger=17
+browser_delete_cookie
+browser_delete_cookies
+browser_delete=2
+browser_dom_checked
+browser_dom_click
+browser_dom_get_html
+browser_dom_inner_html
+browser_dom_query
+browser_dom_rect
+browser_dom_select
+browser_dom_selected
+browser_dom_set_html
+browser_dom_set_value
+browser_dom=10
+browser_download_image
+browser_download=1
+browser_edit_copy
+browser_edit_cut
+browser_edit_delete
+browser_edit_paste
+browser_edit_redo
+browser_edit_select_all
+browser_edit_undo
+browser_edit=7
+browser_element_action
+browser_element=1
+browser_evaluate
+browser_evaluate=1
+browser_event
+browser_event=1
+browser_execute_js
+browser_execute=1
+browser_extract
+browser_extract=1
+browser_fbro_version
+browser_fbro=1
+browser_file_dialog
+browser_file=1
+browser_fill_attr_get
+browser_fill_attr_set
+browser_fill_click
+browser_fill_exists
+browser_fill_focus
+browser_fill_form
+browser_fill_get_text
+browser_fill_scroll
+browser_fill_select
+browser_fill_set_text
+browser_fill_set_value
+browser_fill_trigger
+browser_fill=12
+browser_find
+browser_find_by_hwnd
+browser_find_by_tag
+browser_find=3
+browser_fingerprint
+browser_fingerprint_appcodename
+browser_fingerprint_apply
+browser_fingerprint_appname
+browser_fingerprint_appversion
+browser_fingerprint_check
+browser_fingerprint_cookie_enabled
+browser_fingerprint_gpu
+browser_fingerprint_java_enabled
+browser_fingerprint_languages
+browser_fingerprint_online
+browser_fingerprint_pixel_ratio
+browser_fingerprint_plugins
+browser_fingerprint_product_sub
+browser_fingerprint_screen_xy
+browser_fingerprint_touch_enable
+browser_fingerprint_ua
+browser_fingerprint_vendor_sub
+browser_fingerprint_webgl_vendor
+browser_fingerprint=19
+browser_font_randomize
+browser_font=1
+browser_forward
+browser_forward=1
+browser_frame_by_id
+browser_frame_by_name
+browser_frame_names
+browser_frame=3
+browser_get_all_cookies
+browser_get_cookies
+browser_get_extra_data
+browser_get_focused_frame
+browser_get_forms
+browser_get_frames
+browser_get_global_cache_dir
+browser_get_id
+browser_get_main_browser
+browser_get_process_type
+browser_get_run_style
+browser_get_scroll
+browser_get_source
+browser_get_text
+browser_get_title
+browser_get_url
+browser_get_window_handle
+browser_get_window_style
+browser_get_window_title
+browser_get_zoom
+browser_get=20
+browser_hash
+browser_hash=1
+browser_highlight
+browser_highlight=1
+browser_inject
+browser_inject=1
+browser_intercept
+browser_intercept=1
+browser_ipc_renderer_count
+browser_ipc_renderer_ids
+browser_ipc_send_all
+browser_ipc_send_to
+browser_ipc=4
+browser_is_loading
+browser_is_muted
+browser_is_same
+browser_is_view
+browser_is=4
+browser_json
+browser_json=1
+browser_kernel_auth
+browser_kernel_cdp_monitor
+browser_kernel_cert
+browser_kernel_download
+browser_kernel_events_all
+browser_kernel_ipc_clear
+browser_kernel_ipc_queue
+browser_kernel_menu
+browser_kernel_reactor
+browser_kernel_reverse_algo
+browser_kernel_reverse_functions
+browser_kernel_reverse_probe
+browser_kernel_reverse_sources
+browser_kernel_reverse_trace
+browser_kernel_reverse_watch_global
+browser_kernel_scheme
+browser_kernel_watch
+browser_kernel=17
+browser_key_event
+browser_key=1
+browser_list
+browser_list=1
+browser_loading_info
+browser_loading=1
+browser_menu_alias
+browser_menu_probe
+browser_menu=2
+browser_meta
+browser_meta=1
+browser_mouse_click
+browser_mouse_move
+browser_mouse_wheel
+browser_mouse=3
+browser_move_window
+browser_move=1
+browser_navigate
+browser_navigate=1
+browser_network
+browser_network_body
+browser_network_export
+browser_network=3
+browser_open_devtools
+browser_open=1
+browser_permission_spoof
+browser_permission=1
+browser_popup_info
+browser_popup=1
+browser_print
+browser_print_to_pdf
+browser_print=2
+browser_proxy_pool
+browser_proxy=1
+browser_refresh_cookies
+browser_refresh=1
+browser_reload
+browser_reload=1
+browser_request_context
+browser_request=1
+browser_resources
+browser_resources=1
+browser_restore_gui
+browser_restore=1
+browser_retry
+browser_retry=1
+browser_reverse_add_binding
+browser_reverse_async_stack
+browser_reverse_await_promise
+browser_reverse_blackbox
+browser_reverse_breakpoints_active
+browser_reverse_bypass_csp
+browser_reverse_cache_disable
+browser_reverse_call_fn
+browser_reverse_cdp_hook
+browser_reverse_compile_script
+browser_reverse_cookie_cdp
+browser_reverse_cookie_sources
+browser_reverse_css_coverage
+browser_reverse_detect_obfuscator
+browser_reverse_detect_traps
+browser_reverse_dom_breakpoint
+browser_reverse_dom_resolve
+browser_reverse_emulate_focus
+browser_reverse_env
+browser_reverse_evaluate_silent
+browser_reverse_extract
+browser_reverse_get_possible_breakpoints
+browser_reverse_heap
+browser_reverse_hook
+browser_reverse_hook_logs
+browser_reverse_hook_multi
+browser_reverse_initiator
+browser_reverse_input_cdp
+browser_reverse_instrument
+browser_reverse_instrument_script
+browser_reverse_layer_tree
+browser_reverse_listeners
+browser_reverse_network_conditions
+browser_reverse_network_intercept
+browser_reverse_patch
+browser_reverse_pause_on_exceptions
+browser_reverse_precise_coverage
+browser_reverse_preload
+browser_reverse_preset
+browser_reverse_profile
+browser_reverse_query_objects
+browser_reverse_return_value
+browser_reverse_runtime
+browser_reverse_scan_crypto
+browser_reverse_search
+browser_reverse_search_script
+browser_reverse_set_variable
+browser_reverse_setup
+browser_reverse_skip_pauses
+browser_reverse_stack_trace
+browser_reverse_string_refs
+browser_reverse_strings
+browser_reverse_trace
+browser_reverse_verify
+browser_reverse_websocket
+browser_reverse=55
+browser_scrape
+browser_scrape=1
+browser_screenshot
+browser_screenshot=1
+browser_scroll_by
+browser_scroll=1
+browser_send_message
+browser_send=1
+browser_set_auto_resize
+browser_set_cookie
+browser_set_focus
+browser_set_mute
+browser_set_parent
+browser_set_preference
+browser_set_proxy
+browser_set_s5_proxy
+browser_set_window_style
+browser_set_zoom
+browser_set=10
+browser_show_window
+browser_show=1
+browser_shutdown
+browser_shutdown=1
+browser_snapshot
+browser_snapshot=1
+browser_start_download
+browser_start=1
+browser_startup_args
+browser_startup=1
+browser_status
+browser_status=1
+browser_stop
+browser_stop_find
+browser_stop=2
+browser_task_runner_post
+browser_task=1
+browser_time_convert
+browser_time=1
+browser_touch_move
+browser_touch_press
+browser_touch_release
+browser_touch=3
+browser_uri_decode
+browser_uri_encode
+browser_uri=2
+browser_user_tags
+browser_user=1
+browser_view_source
+browser_view=1
+browser_vip_clear_s5_proxy
+browser_vip_disable_console
+browser_vip_disable_debugger
+browser_vip_dom_get_document
+browser_vip_dom_node_edit
+browser_vip_dom_search
+browser_vip_enable_devtools_observer
+browser_vip_enable_inspector
+browser_vip_enable_js_env
+browser_vip_execute_js_context
+browser_vip_extension_info
+browser_vip_filter_patch_text
+browser_vip_filter_replace_data
+browser_vip_filter_replace_file
+browser_vip_fingerprint_audio
+browser_vip_fingerprint_audio_fixed
+browser_vip_fingerprint_battery
+browser_vip_fingerprint_canvas
+browser_vip_fingerprint_canvas_fixed
+browser_vip_fingerprint_canvas_font
+browser_vip_fingerprint_font
+browser_vip_fingerprint_geolocation
+browser_vip_fingerprint_hardware
+browser_vip_fingerprint_media_devices
+browser_vip_fingerprint_product
+browser_vip_fingerprint_rect
+browser_vip_fingerprint_screen
+browser_vip_fingerprint_ssl
+browser_vip_fingerprint_timezone
+browser_vip_fingerprint_viewport
+browser_vip_fingerprint_webgl
+browser_vip_fingerprint_webgl_fixed
+browser_vip_fingerprint_webrtc
+browser_vip_get_js_env_ids
+browser_vip_key_click
+browser_vip_key_input
+browser_vip_key_press
+browser_vip_key_release
+browser_vip_key_type
+browser_vip_load_extension
+browser_vip_mouse_click
+browser_vip_mouse_move
+browser_vip_mouse_press
+browser_vip_mouse_release
+browser_vip_mouse_wheel
+browser_vip_new_tab
+browser_vip_orientation
+browser_vip_send_devtools_msg
+browser_vip_set_css_version
+browser_vip_set_is_trusted
+browser_vip_set_v8_version
+browser_vip_set_web_version
+browser_vip_touch_cancel
+browser_vip_touch_emulation
+browser_vip_unload_extension
+browser_vip_websocket_intercept
+browser_vip=56
+browser_wait
+browser_wait=1
+browser_window_info
+browser_window=1
+license_status
+license_status=1
+mcp_help
+mcp_help=1
+mcp_result
+mcp_result=1
+mcp_status
+mcp_status=1
+mcp_tools_list
+mcp_tools_set
+mcp_tools=2
+ping
+ping=1
+schedule
+schedule=1
+workflow_get
+workflow_get=1
+workflow_list
+workflow_list=1
+workflow_run
+workflow_run=1
+workflow_stop
+workflow_stop=1
+```
 
-## 输入仿真（真实事件）
-rowser_mouse_click / rowser_mouse_move / rowser_mouse_wheel · rowser_key_event / rowser_key_press / rowser_key_release / rowser_key_type / rowser_key_click · rowser_touch_press / rowser_touch_move / rowser_touch_release / rowser_touch_cancel · rowser_element_action（按快照索引操作）
+## 怎么用
+- 客户端里调用 `tools/list` 取**逐条短描述**；`mcp_help {tool:"<名字>"}` 取该工具的**详述**（设计理由/边界/示例）
+- `mcp_help`（无参）或 `mcp_tools_list` 可按关键词检索工具
+- 常用入口：`browser_navigate` → `browser_snapshot` / `browser_get_text` → `browser_click_text` / `browser_fill_form`
 
-## JS 执行与 CDP
-rowser_execute_js / rowser_evaluate · rowser_cdp / rowser_cdp_call / rowser_cdp_event · rowser_console_eval · rowser_reverse_runtime（properties/evaluate/global） · rowser_reverse_call_fn · rowser_reverse_await_promise
-
-## 网络与抓取（含逆向）
-rowser_network（list/enable/clear/**body**） · rowser_network_export(HAR/JSON) · rowser_network_body · rowser_collect（network/console/事件族开关） · rowser_reverse_initiator（请求 JS 调用栈） · rowser_reverse_string_refs / rowser_reverse_search / rowser_reverse_search_script / rowser_reverse_sources / rowser_reverse_extract
-
-## 调试与逆向（Debugger / V8）
-rowser_debugger_enable / disable / pause / esume / step_* / stack / evaluate / set_breakpoint / list_breakpoints / clear_breakpoints / wait_paused / last_paused / script_source / eturn_value / set_variable / uto
-rowser_reverse_hook（无侵入函数 Hook） · rowser_reverse_hook_logs / _multi · rowser_reverse_instrument / _script · rowser_reverse_precise_coverage（精确覆盖率） · rowser_reverse_detect_obfuscator / _traps · rowser_reverse_patch（热补丁） · rowser_reverse_cookie_sources · rowser_reverse_listeners · rowser_reverse_heap / _query_objects / _dom_breakpoint / _async_stack / _breakpoints_active
-
-## 反检测 / 指纹（VIP）
-rowser_antidetect_presets · rowser_fingerprint_*（UA / 平台 / 语言 / 屏幕 / 像素比 / WebGL / Canvas / Audio / 时区 / 地理位置 / 电池 / 硬件 / 媒体设备 / SSL / WebRTC / 触摸 / Event.isTrusted / V8 与 Web 内核版本等） · rowser_fingerprint_check（自洽性检测） · rowser_permission_spoof · rowser_canvas_noise · rowser_font_randomize · rowser_proxy_pool / rowser_set_proxy / rowser_set_s5_proxy
-
-## 内核层（CEF/Chromium 事件与协议）
-rowser_kernel_*（cert / download / menu / reactor / watch / scheme / auth / cdp_monitor / ipc_queue / events_all）
-
-## 文件、下载、截图与编码工具
-rowser_start_download / rowser_download_image · rowser_save_to? 见说明书 · rowser_base64_encode / _decode · rowser_uri_encode / _decode · rowser_codec（hex/UTF-8/GBK） · rowser_hash（MD5/XXH128/CRC32） · rowser_json · rowser_data_uri
-
-## 会话、标签、批量与工作流
-rowser_get_cookies / rowser_set_cookie / rowser_delete_cookie(s) / rowser_clear_cache* · rowser_user_tags / rowser_find_by_tag · rowser_workflow_*（工作流执行/停止） · rowser_schedule（定时任务） · 	asks/get / 	asks/result（标准 Tasks 扩展） · mcp_help（按需取工具详述，控制会话固定开销）
-
-> 上表为**域级导航**而非逐条清单；完整逐条描述在客户端里由 	ools/list 提供，或调用 mcp_help {tool:"<名字>"} 取详述。
+> 本文件由上表工具名清单**自动生成**，与发布版一致；改动工具集后请重新导出。
