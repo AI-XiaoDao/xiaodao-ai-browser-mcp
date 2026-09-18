@@ -41,7 +41,6 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 348
 | `xiaodao-ai-browser-mcp-v3.3.3-x64.zip` | 成品 x64（100 项，内层 exe MD5 `3E8FF56C390D582359A3B4328C3D6119`） |
 | `xiaodao-ai-browser-mcp-v3.3.3-x86.zip` | 成品 x86（98 项，含 CEFLib(x86) 运行库，内层 exe MD5 `F630D3114E8AA3E3C1BD6378B8A0AE0F`） |
 | `dsh-installer-v3.3.3-full.zip` | DSH 安装器完整包（安装器本体与 v3.3.2 相同，仅内层 MCP 载荷升级到 3.3.3） |
-| `xiaodao-mcp-generated-cpp-v3.3.3-x64.zip` | 火山编译器生成的完整 C++ 源码（37 `.cpp` + 229 `.h` + 1 `.rc`） |
 | `00-checksums-sha256-md5.csv` | 资产 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
