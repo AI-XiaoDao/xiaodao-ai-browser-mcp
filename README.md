@@ -55,3 +55,9 @@ examples/mcp_config.example.json  客户端配置示例（含 UTF-8 开关）
 assets/                    图标与预览图
 ```n
 > 二进制成品不进入 Git 历史，全部随 [Releases](../../releases) 分发。
+
+## 能力与优势 / Capabilities & Advantages
+
+- **能力清单（按域归类，348 工具）**：[docs/CAPABILITIES.md](docs/CAPABILITIES.md)
+- **优势与差异化（每条均可核验）**：[docs/ADVANTAGES.md](docs/ADVANTAGES.md)
+
