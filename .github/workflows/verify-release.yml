@@ -1,0 +1,69 @@
+name: verify-release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # 确定性门禁：按 Release 内的 checksums CSV 逐个重算 MD5
+  checksums:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify release asset checksums
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tag = gh release list --repo $env:GITHUB_REPOSITORY --limit 1 --json tagName --jq '.[0].tagName'
+          Write-Host "release tag: $tag"
+          New-Item -ItemType Directory dl -Force | Out-Null
+          gh release download $tag --repo $env:GITHUB_REPOSITORY --pattern '*checksums*.csv' --dir dl --clobber
+          $csv = Get-ChildItem dl -Filter *.csv | Select-Object -First 1
+          Write-Host "manifest: $($csv.Name)"
+          gh release download $tag --repo $env:GITHUB_REPOSITORY --dir dl --clobber
+          $rows = Import-Csv $csv.FullName -Encoding UTF8
+          $bad = 0
+          foreach ($row in $rows) {
+            $p = Join-Path 'dl' $row.File
+            if (-not (Test-Path $p)) { Write-Host "MISSING  $($row.File)"; $bad++; continue }
+            $h = (Get-FileHash $p -Algorithm MD5).Hash
+            if ($h -ne $row.MD5) { Write-Host "MISMATCH $($row.File)"; $bad++ } else { Write-Host "OK       $($row.File)" }
+          }
+          Write-Host "verified $($rows.Count) assets, failures=$bad"
+          if ($bad -gt 0) { throw "$bad asset(s) failed verification" }
+
+  # 行为回归：下载 x64 成品跑协议套件（advisory，待 CI 稳定后再转为必需）
+  behaviour:
+    runs-on: windows-latest
+    needs: checksums
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download x64 package
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $tag = gh release list --repo $env:GITHUB_REPOSITORY --limit 1 --json tagName --jq '.[0].tagName'
+          New-Item -ItemType Directory dl -Force | Out-Null
+          gh release download $tag --repo $env:GITHUB_REPOSITORY --pattern '*x64.zip' --dir dl --clobber
+          $z = Get-ChildItem dl -Filter *x64.zip | Select-Object -First 1
+          Expand-Archive $z.FullName -DestinationPath rt -Force
+          (Get-ChildItem rt -Recurse -Filter AI-Fbowser-Mcp.exe | Select-Object -First 1).FullName | Set-Content exe-path.txt
+          Get-Content exe-path.txt
+      - name: Run protocol suites (frames / transport / pool)
+        shell: pwsh
+        run: |
+          $exe = Get-Content exe-path.txt
+          foreach ($s in @('frames','transport','pool')) {
+            Write-Host "=== suite: $s ==="
+            node tests/mcp-suite.mjs --exe $exe --suite $s
+          }

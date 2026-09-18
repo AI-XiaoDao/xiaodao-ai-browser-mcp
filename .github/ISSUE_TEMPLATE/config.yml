@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全问题 / Security
+    url: https://github.com/AI-XiaoDao/xiaodao-ai-browser-mcp/security/policy
+    about: 请勿公开报告安全漏洞，走 SECURITY.md 的私下渠道。

@@ -1,0 +1,51 @@
+name: 缺陷报告 / Bug report
+description: 可复现的缺陷（请先按 SUPPORT.md 收集诊断信息）
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请勿在此报告安全问题（请走 SECURITY.md）。缺少版本/日志的 Issue 通常无法定位。
+  - type: input
+    id: version
+    attributes:
+      label: 版本（ping 工具返回的 version）
+      placeholder: "3.3.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: pkg
+    attributes:
+      label: 成品包
+      options: ["x64 (xiaodao-ai-browser-mcp-v3.3.3-x64.zip)", "x86", "DSH 安装器安装", "自行编译"]
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: "1) 调用 browser_navigate … 2) 再调用 …"
+    validations:
+      required: true
+  - type: textarea
+    id: expect
+    attributes:
+      label: 期望结果 / 实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: diag
+    attributes:
+      label: 诊断信息
+      description: "--print-config 输出（可打码）、mcp_console.log 相关片段（注明编码：GBK 或 UTF-8）"
+      render: text
+    validations:
+      required: false
+  - type: input
+    id: env
+    attributes:
+      label: 环境
+      placeholder: "Windows 11 23H2 x64 · 客户端：Claude Desktop 0.x · 是否设 AI_BROWSER_MCP_STDERR_UTF8"
+    validations:
+      required: true
