@@ -45,10 +45,20 @@ jobs:
   behaviour:
     runs-on: windows-latest
     needs: checksums
-    continue-on-error: true
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+      - name: Skip when runner has no interactive desktop (CEF cannot start a browser)
+        id: sess
+        shell: pwsh
+        run: |
+          $interactive = [Environment]::UserInteractive
+          $shell = @(Get-Process -Name explorer -ErrorAction SilentlyContinue).Count
+          Write-Host "UserInteractive=$interactive  explorer processes=$shell"
+          if (-not $interactive -or $shell -eq 0) {
+            Write-Host "::warning title=behaviour skipped::runner has no interactive desktop session; CEF cannot create a browser. Behavioural regression must be run locally (run-tests.ps1) or on a self-hosted Windows runner."
+            "skip=1" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          } else { "skip=0" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append }
       - name: Download x64 package
         shell: pwsh
         env:
@@ -62,6 +72,7 @@ jobs:
           (Get-ChildItem rt -Recurse -Filter AI-Fbowser-Mcp.exe | Select-Object -First 1).FullName | Set-Content exe-path.txt
           Get-Content exe-path.txt
       - name: Run protocol suites (frames / transport / pool)
+        if: steps.sess.outputs.skip != '1'
         shell: pwsh
         run: |
           $exe = Get-Content exe-path.txt
