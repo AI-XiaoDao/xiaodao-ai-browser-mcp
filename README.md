@@ -48,6 +48,9 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 （`tools/list` 94ms，修前 11267ms）、CDP 层诚实性、客户端矩阵 7/7 等历史回归证据。
 
 ## 已知边界 / Known limits
+
+完整审计报告与证据：**[docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)**
+
 - exe **未做代码签名**（SmartScreen 会提示）· no code signing yet
 - 缓存库"内容型"毒化触发条件不可构造，仅有启发式安全网 · cache-DB content-poisoning has no reproducible trigger (heuristic net only)
 - 非 `tools/call` 的 `initialize`/`workflow_stop` 在全忙期仍入队（有界延迟，不丢请求）· those still queue while the worker pool is saturated (bounded, never dropped)
