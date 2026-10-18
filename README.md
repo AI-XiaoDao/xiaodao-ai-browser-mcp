@@ -21,7 +21,8 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 **最新版本 / Latest: `v3.3.4`** → 见 [Releases](../../releases)；源码在私密仓 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
 
 ## 安装（三步） / Install (3 steps)
-1. 下载并解压 `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` → Download & unzip the x64 package
+1. 下载并解压对应架构包：`xiaodao-ai-browser-mcp-v3.3.4-x64.zip`（64 位）或 `xiaodao-ai-browser-mcp-v3.3.4-x86.zip`（32 位）
+   → Download & unzip the x64 or x86 package for your Windows architecture
 2. 以 `AI-Fbowser-Mcp.exe` 所在目录为运行目录 → Use the folder containing `AI-Fbowser-Mcp.exe` as the working directory
 3. `AI-Fbowser-Mcp.exe --print-config` 输出可直接粘贴进 MCP 客户端配置的 JSON（自动带本机真实路径）
    → `--print-config` prints a ready-to-paste `mcpServers` JSON block with the real local path.
@@ -39,13 +40,21 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` | 成品 x64（349 工具，含完整 CEF 运行库与 Logo 资源；内层 exe MD5 `61AF314DE4CDAA3A5A79595DABAB920C`，9,280,000 B） |
-| `00-checksums-sha256-md5.csv` | 资产 MD5 + SHA256 |
+| `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` | 64 位成品（349 工具，完整 CEF 运行库与 Logo；165,381,000 B；内层 exe MD5 `DDA9CB4C2DBF797713E650A6DECE9B3E`，9,280,512 B） |
+| `xiaodao-ai-browser-mcp-v3.3.4-x86.zip` | 32 位成品（349 工具，完整 32 位 CEF 运行库与 Logo；143,361,671 B；内层 exe MD5 `F7DE9DF5351BE38C696EBC694D158F7E`，7,683,584 B） |
+| `xiaodao-mcp-source-volcano-v3.3.4.zip` | 火山 PC 完整源码归档 |
+| `xiaodao-mcp-generated-cpp-v3.3.4-x64.zip` | x64 生成的 C++ 中间源码归档 |
+| `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-编译 `0 错误 0 警告`（x64）；349 工具全量扫描发现 2 个“暂停态无回包”，已修复并完成专项回归
-（paused guard / cancel / touch / batch / retry），另有帧族 P1–P8、CL 失配两向、工作池饱和读线程快答
-（`tools/list` 94ms，修前 11267ms）、CDP 层诚实性、客户端矩阵 7/7 等历史回归证据。
+`v3.3.4` 最终构建：x64 / x86 均为 **0 错误、0 警告**。
+
+- **x64 最终全量扫描：335 成功、14 个明确失败、0 无回包、0 进程退出**。14 个失败均属于安全确认、缺失外部插件、内核明确不支持或需要特定暂停现场的负向用例，不是协议挂起。
+- **x86 最终全量扫描：334 成功、15 个明确失败、0 无回包、0 进程退出**（包含被移除的测试夹具项；其余失败性质同上）。
+- `browser_resources` 的 x86 回调 ABI 问题已修复：x86 返回 `metrics_available:false`，不再把未知统计伪装成可用；x64 继续返回完整指标。
+- 截图、PDF 的 `save_to/path` 现在自动创建父目录；`browser_reverse_heap` 的 snapshot 改为异步提交，单次约 30–95ms 返回，不再占死工作池。
+- `browser_fingerprint_ua` 默认安全拒绝并在约 1 秒内返回原因；只有显式 `confirm:true` 才进入高风险渲染器切换路径。
+- `tools/list` 读线程快答、CDP 诚实性、客户端矩阵 7/7、取消通知、帧族与工作池回归证据保留在 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
 
 ## 已知边界 / Known limits
 
@@ -54,10 +63,13 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 - exe **未做代码签名**（SmartScreen 会提示）· no code signing yet
 - 缓存库"内容型"毒化触发条件不可构造，仅有启发式安全网 · cache-DB content-poisoning has no reproducible trigger (heuristic net only)
 - 非 `tools/call` 的 `initialize`/`workflow_stop` 在全忙期仍入队（有界延迟，不丢请求）· those still queue while the worker pool is saturated (bounded, never dropped)
+- x86 构建暂不启用进程/CacheData 内联统计（会破坏回调 ABI），`browser_resources` 明确返回 `metrics_available:false`。
+- 虚拟 UA、预注入插装等会重启渲染器或阻塞调试通道的操作默认需要显式确认；这是内核能力边界，不是静默成功。
 
 ## 仓库结构 / Repository layout
 
-```nREADME.md                  本文件（中英双语）
+```
+README.md                  本文件（中英双语）
 docs/QUICKSTART_ZH.md     快速上手（中文）
 docs/QUICKSTART_EN.md     Quick Start (English)
 docs/CHANGELOG.md         更新日志
@@ -65,7 +77,7 @@ docs/VERIFICATION.md      验收事实（机对机证据）
 docs/KNOWN-LIMITS.md      已知边界
 examples/mcp_config.example.json  客户端配置示例（含 UTF-8 开关）
 assets/                    图标与预览图
-```n
+```
 > 二进制成品不进入 Git 历史，全部随 [Releases](../../releases) 分发。
 
 ## 能力与优势 / Capabilities & Advantages

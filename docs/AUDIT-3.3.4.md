@@ -70,7 +70,8 @@
 
 | 用例 | 预期 | 实测 | 通过 |
 |---|---|---|---|
-| 349 工具 schema 驱动冒烟 | 全部有回执，0 崩溃/0 永久挂起 | **255 ok + 94 可操作错误 + 0 no-reply + 0 exit** | ✅ |
+| 349 工具 x64 最终稳健扫描 | 全部有回执，0 崩溃/0 永久挂起 | **335 ok + 14 明确负向结果 + 0 no-reply + 0 exit** | ✅ |
+| 349 工具 x86 最终稳健扫描 | 32 位可执行同口径验收 | **334 ok + 15 明确负向结果 + 0 no-reply + 0 exit** | ✅ |
 | 初始化首调竞态 | 首次 navigate/show_window 成功 | 6/6 通过，首调 185ms | ✅ |
 | batch 缺参/空数组/字符串 | 不崩溃，明确错误 | 8/8 通过（有效 batch=1 成功） | ✅ |
 | 暂停态 CDP / DOM / 触摸 | 快速可操作错误，不拖垮通道 | 7/7 通过；恢复后 cdp/dom 正常 | ✅ |
@@ -83,7 +84,7 @@
 | 安全路径/协议/SSRF | 目录外文件、file/data、元数据端点被拒 | 11/11 | ✅ |
 | 本机运行时 | 3.3.4 且 349 工具 | 主运行时/旧安装均 `ping=3.3.4` | ✅ |
 
-证据文件：`smoke-all7.json`、`protocol-report2.json`、`report-security2.json`、`report-batch2.json`、`report-paused.json`、`report-touch-paused.json`。
+最终证据：`smoke-all-x64-final.json`、`smoke-all-x86-release-final.json`、`report-x86-final-output-dirs.json`、`report-x86-final-normal2.json`。协议/安全/暂停态历史证据仍保留：`protocol-report2.json`、`report-security2.json`、`report-batch2.json`、`report-paused.json`、`report-touch-paused.json`。
 
 ## 5. A–K 覆盖矩阵
 
@@ -107,13 +108,24 @@
 2. exe **未做代码签名**，SmartScreen 可能提示。
 3. 未提供逐工具 P50/P95 指标；当前有池快答、db 统计与 doctor 自检。
 4. CDP 通道可被 VIP 内核开关（如禁用 Debugger/关闭观察者）主动失效；工具会明确报错并要求重启，不会静默假成功。
-5. 349 冒烟的 94 个错误中，包含大量“空参/占位参数”校验与 CDP 已禁用状态；这不等于 349 个工具在任意合法业务态都已 100% 成功，仍需逐工具正常态样本。
+5. 最终扫描的 14/15 个负向结果，属于安全确认、缺失外部插件、内核明确不支持、缺少特定暂停现场或测试前置；这不是“349 个工具在任意合法业务态都已 100% 成功”，正常态样本仍应继续扩充。
 6. 自动化重试/熔断主要面向远程上游；本地浏览器写操作不做无条件自动重试，避免重复点击/提交。
 
 ## 7. 交付与仓库
 
-- 版本：**3.3.4**；工具数 **349**；x64 `0 错误 0 警告`
-- 源码仓：`AI-XiaoDao/xiaodao-ai-browser-mcp-src`，main `6dc7c67`，tag `v3.3.4`
-- 成品仓：`AI-XiaoDao/xiaodao-ai-browser-mcp`，main `18f66a3`
+- 版本：**3.3.4**；工具数 **349**；x64 / x86 均 `0 错误 0 警告`
+- 源码仓：`AI-XiaoDao/xiaodao-ai-browser-mcp-src`，main/tag 以本文件发布时的仓库页为准
+- 成品仓：`AI-XiaoDao/xiaodao-ai-browser-mcp`，main/tag 以本文件发布时的仓库页为准
 - Release：`https://github.com/AI-XiaoDao/xiaodao-ai-browser-mcp/releases/tag/v3.3.4`
 - 本机：`Mcp-Browser\browser`、旧 AppData 安装、Codex/DSH/Trae 配置均已切到 3.3.4
+
+## 8. 最终增量修复（x64 / x86 双架构）
+
+| 修复 | 结果 |
+|---|---|
+| `browser_resources` x86 回调 ABI | x86 不再返回非法片段；明确 `metrics_available:false`，x64 保留完整指标 |
+| 截图 / PDF 父目录 | `save_to`/`path` 自动创建父目录；专项 4/4 |
+| 堆快照 | `browser_reverse_heap` snapshot 改为异步提交，约 30–95ms 返回，不占满工作池 |
+| 暂停/CDP 状态污染 | 测试与运行建议按暂停/恢复、CDP 毒化后重启隔离；最终扫描 0 无回包 |
+| 虚拟 UA | 默认安全拒绝并在约 1 秒内返回原因；显式 `confirm:true` 才进入高风险路径 |
+| 32 位交付 | 完整 32 位 CEF 运行时 + 32 位 sqlite 依赖；`ping=3.3.4`、349 工具、正常页操作通过 |
