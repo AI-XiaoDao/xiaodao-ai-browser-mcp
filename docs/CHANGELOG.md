@@ -1,5 +1,15 @@
 # 更新日志 / Changelog
 
+## v3.3.4 (2026-10-19)
+**商业级审计修复 + Logo + Token 优化。**
+- 版本号/工程版本/exe 版本统一升级到 3.3.4；新增程序图标 `assets/logo.ico`（16–256 多尺寸）
+- 工具数 348 → 349：新增 `mcp_doctor` 配置/运行自检
+- 修复初始化首个浏览器竞态、`batch` 字符串/空数组崩溃、CDP 暂停态挂起、CDP 监控假清空、
+  内核未知 action 假成功、`java_enabled` 假成功、`undefined→null`、滚轮/触摸隐藏态自愈、
+  断点零命中提示与自动暂停回退、取消通知无法中断等待等问题
+- 新增 `tool_profile=all/core/reverse/debug`；`core` 97 工具的 tools/list 体积约 -71.6%
+- 新增 `--debug` 结构化 stderr trace、配置校验告警、云元数据端点 SSRF 防护
+
 ## v3.3.3 (2026-09-19)
 **唯一功能性变更：stderr 输出编码可切换（国际化）。**
 - 新增环境变量 `AI_BROWSER_MCP_STDERR_UTF8`（`1/true/yes/on`）→ 日志走 UTF-8；默认仍为 936/GBK，**完全向后兼容**

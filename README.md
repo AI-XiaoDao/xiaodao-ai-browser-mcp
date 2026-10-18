@@ -1,6 +1,7 @@
-<p align="center"><img src="assets/promo/xiaodao-mcp-banner-1200x630.png" alt="Xiaodao AI-Browser MCP Server — Windows browser automation MCP server with 348 tools, Chromium/CEF kernel, stdio transport" width="100%"></p>
+<p align="center"><img src="assets/logo.png" width="96" alt="Xiaodao AI-Browser MCP logo"></p>
+<p align="center"><img src="assets/promo/xiaodao-mcp-banner-1200x630.png" alt="Xiaodao AI-Browser MCP Server — Windows browser automation MCP server with 349 tools, Chromium/CEF kernel, stdio transport" width="100%"></p>
 
-**Xiaodao AI-Browser MCP Server（小刀 AI 浏览器 MCP 服务端）** is a local **browser automation MCP server for Windows** built on the **Chromium / CEF** kernel. It speaks **MCP over stdio** (no ports, no daemon) and exposes **348 tools** covering navigation, extraction, form filling, screenshots/PDF, **network capture & HAR export**, **Chrome DevTools Protocol (CDP)** control, **JavaScript debugging & reverse engineering** (function hooks, hot patching, precise coverage, obfuscation detection), **anti-detect fingerprinting**, and **kernel-level CEF events**.
+**Xiaodao AI-Browser MCP Server（小刀 AI 浏览器 MCP 服务端）** is a local **browser automation MCP server for Windows** built on the **Chromium / CEF** kernel. It speaks **MCP over stdio** (no ports, no daemon) and exposes **349 tools** covering navigation, extraction, form filling, screenshots/PDF, **network capture & HAR export**, **Chrome DevTools Protocol (CDP)** control, **JavaScript debugging & reverse engineering** (function hooks, hot patching, precise coverage, obfuscation detection), **anti-detect fingerprinting**, and **kernel-level CEF events**.
 关键词 / Keywords: MCP server, browser automation, Chromium, CEF, CDP, Chrome DevTools Protocol, web scraping, HAR, Playwright alternative, Puppeteer alternative, reverse engineering, JS debugging, anti-detect, fingerprint, headless-less local browser, Windows, Claude Desktop, Cursor, Trae, DeepSeek Harness, 浏览器自动化, 逆向, 指纹, 反检测.
 
 ## 宣传图 / Promo
@@ -14,17 +15,17 @@
 
 # Xiaodao AI-Browser MCP Server · 小刀 AI 浏览器 MCP Server
 
-Windows 本地浏览器自动化 MCP 服务端 —— **Google Chromium / CEF** 内核、仅 stdio 通道（`--mcp-stdio`）、**348** 个工具。
-A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 348 tools).
+Windows 本地浏览器自动化 MCP 服务端 —— **Google Chromium / CEF** 内核、仅 stdio 通道（`--mcp-stdio`）、**349** 个工具。
+A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349 tools).
 
-**最新版本 / Latest: `v3.3.3`** → 见 [Releases](../../releases)；源码在私密仓 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
+**最新版本 / Latest: `v3.3.4`** → 见 [Releases](../../releases)；源码在私密仓 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
 
 ## 安装（三步） / Install (3 steps)
-1. 下载并解压 `xiaodao-ai-browser-mcp-v3.3.3-x64.zip`（或 x86）→ Download & unzip the x64 (or x86) package
+1. 下载并解压 `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` → Download & unzip the x64 package
 2. 以 `AI-Fbowser-Mcp.exe` 所在目录为运行目录 → Use the folder containing `AI-Fbowser-Mcp.exe` as the working directory
 3. `AI-Fbowser-Mcp.exe --print-config` 输出可直接粘贴进 MCP 客户端配置的 JSON（自动带本机真实路径）
    → `--print-config` prints a ready-to-paste `mcpServers` JSON block with the real local path.
-   也可用 `dsh-installer-v3.3.3-full.zip` 一键安装（含离线运行时与 Node）→ or use the all-in-one DSH installer.
+   需要离线运行时请直接使用 zip 内的完整 CEF 运行库；本版未单独发布 DSH 安装器。
 
 ## 环境变量 / Environment
 | 变量 | 作用 |
@@ -38,13 +39,11 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 348
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.3-x64.zip` | 成品 x64（100 项，内层 exe MD5 `3E8FF56C390D582359A3B4328C3D6119`） |
-| `xiaodao-ai-browser-mcp-v3.3.3-x86.zip` | 成品 x86（98 项，含 CEFLib(x86) 运行库，内层 exe MD5 `F630D3114E8AA3E3C1BD6378B8A0AE0F`） |
-| `dsh-installer-v3.3.3-full.zip` | DSH 安装器完整包（安装器本体与 v3.3.2 相同，仅内层 MCP 载荷升级到 3.3.3） |
+| `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` | 成品 x64（349 工具，含完整 CEF 运行库与 Logo 资源；内层 exe MD5 `5C68A99FB9E49D79C05E0595637CC790`，9,282,048 B） |
 | `00-checksums-sha256-md5.csv` | 资产 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-编译 `0 错误 0 警告`（x64/x86 各一次）；回归 **7 套 34 项全过**：348 工具全量（`no-reply=0`/`bad-json=0`）、帧族 P1–P8、
+编译 `0 错误 0 警告`（x64）；回归覆盖 **349 工具全量**（`no-reply=0`/`bad-json=0`）、帧族 P1–P8、
 CL 失配两向、工作池饱和读线程快答（`tools/list` 94ms，修前 11267ms）、CDP 层诚实性、客户端矩阵 7/7、浸泡 422 次作业无回包 0。
 
 ## 已知边界 / Known limits
@@ -67,6 +66,6 @@ assets/                    图标与预览图
 
 ## 能力与优势 / Capabilities & Advantages
 
-- **能力清单（按域归类，348 工具）**：[docs/CAPABILITIES.md](docs/CAPABILITIES.md)
+- **能力清单（按域归类，349 工具）**：[docs/CAPABILITIES.md](docs/CAPABILITIES.md)
 - **优势与差异化（每条均可核验）**：[docs/ADVANTAGES.md](docs/ADVANTAGES.md)
 

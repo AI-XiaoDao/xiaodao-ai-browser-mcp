@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="AI浏览器 MCP Server — Windows 本地浏览器自动化 MCP 完整文档。349 工具、快速开始、stdio 接入、Cursor/Claude 配置、工作流引擎。网页采集/JS逆向/CDP断点/指纹伪装/填表RPA。Playwright替代,免费发布(仅提供成品,不开放源码)。">
+<meta name="keywords" content="MCP,browser automation,Cursor browser MCP,Claude Desktop browser,Cline MCP,web scraping,Playwright alternative,Puppeteer alternative,Windows browser MCP,CEF browser,CDP debugger,reverse engineering JS,data scraping,form automation RPA,AI agent browser,local MCP server,Google Chromium,CEF,fingerprint anti-detect,network intercept,browser workflow,数据采集,浏览器自动化,逆向Hook,网页抓包,指纹伪装,自动填表">
+<title>AI浏览器 MCP 完整文档 — 349 工具 | 快速开始 | stdio 接入 | Cursor 配置</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="brand">
+    <img src="../assets/logo.png" alt="小刀 AI 浏览器 MCP Logo" style="width:42px;height:42px;border-radius:11px;display:block;margin-bottom:10px">
+    <h2>AI浏览器 MCP</h2>
+    <p>完整使用文档 v<span data-dynamic="version">3.3.4</span></p>
+  </div>
+  <nav class="nav">
+    <div class="nav-group">入门</div>
+    <a href="#overview">概述</a>
+    <a href="#customer">客户手册</a>
+    <a href="#quickstart">快速开始</a>
+    <a href="#skillbooks">文档清单</a>
+    <a href="#architecture">架构说明</a>
+    <div class="nav-group">连接</div>
+    <a href="#protocol">MCP 协议</a>
+    <a href="#cursor">MCP 客户端接入</a>
+    <div class="nav-group">工具</div>
+    <a href="#tools">工具分类</a>
+    <a href="#async">Sync-Wait / 异步</a>
+    <a href="#workflow">工作流</a>
+    <a href="#events">事件监控</a>
+    <a href="#cdp">CDP 调试</a>
+    <div class="nav-group">配置</div>
+    <a href="#config">配置文件</a>
+    <a href="#faq">常见问题</a>
+  </nav>
+  <div style="padding:14px 18px;font-size:.78em;color:var(--muted)">
+    本页为离线文档
+  </div>
+</aside>
+
+<main class="main">
+
+<h1>AI浏览器 MCP Server</h1>
+<p class="lead">基于 Google Chromium（CEF）内核的浏览器自动化 MCP 服务。通过标准 MCP over stdio 接入，为 Cursor、Claude Desktop 及任何 MCP 客户端提供 <strong id="toolCountLive">348</strong> 个浏览器自动化工具。</p>
+
+<!-- ── 概述 ── -->
+<section id="overview">
+<h2>概述</h2>
+<p>AI浏览器 MCP Server 由 MCP 客户端以 <code>--mcp-stdio</code> 自动拉起，<strong>不监听任何端口</strong>。AI 客户端通过 <code>tools/call</code> 调用 <code>browser_navigate</code>、<code>browser_screenshot</code> 等工具，即可操控内嵌 CEF 浏览器完成自动化任务。</p>
+<div class="card">
+  <strong>图例</strong>
+  <p style="margin-top:8px">
+    <span class="tag sync">同步</span> 默认 sync-wait，一次调用返回结果 &nbsp;
+    <span class="tag async">异步</span> 返回 task_id，需 <code>mcp_result</code> 轮询 &nbsp;
+    <span class="tag vip">高级</span> 高级功能（发布包已全部开放） &nbsp;
+    <span class="tag sync">远程</span> <code>browser_create</code> / <code>browser_close</code> / <code>browser_create_tab</code> 均可远程调用（2026-09-16 起已实现，不再是禁用占位）；另有 <code>browser_shutdown</code> 可整体收工
+  </p>
+</div>
+</section>
+
+<!-- ── 客户手册 ── -->
+<section id="customer">
+<h2>客户使用手册</h2>
+<p>面向<strong>终端客户</strong>：无需了解 MCP 协议，按手册完成安装与 Cursor 接入后，用自然语言让 AI 操控浏览器。</p>
+<div class="btn-row">
+  <a class="btn" href="客户使用手册.md" target="_blank">📘 客户使用手册（推荐新客户）</a>
+</div>
+<div class="table-wrap"><table>
+  <tr><th>章节</th><th>内容</th></tr>
+  <tr><td>安装</td><td>解压即用，<strong>免费版无需任何激活</strong>（无卡密 / 机器码 / license.json）</td></tr>
+  <tr><td>三种使用方式</td><td>Cursor 对话 / 其他 MCP 客户端 / 自有程序直连</td></tr>
+  <tr><td>常见业务场景</td><td>打开网页、填表、看网络、采集、逆向等话术示例</td></tr>
+  <tr><td>修改配置</td><td>mcp_config.json 浏览器行为字段</td></tr>
+  <tr><td>常见问题</td><td>看不到工具、连接失败、卡死恢复等</td></tr>
+</table></div>
+</section>
+
+<!-- ── 快速开始 ── -->
+<section id="quickstart">
+<h2>快速开始</h2>
+<div class="steps">
+  <div class="step"><strong>解压（无需激活）</strong><br>本版为<strong>免费发布</strong>，解压即用：没有卡密、没有机器码、没有 <code>license.json</code>，也没有任何激活命令。双击 <code>AI-Fbowser-Mcp.exe</code> 可查看版权信息与按本机路径生成好的客户端配置。</div>
+  <div class="step"><strong>配置 MCP 客户端</strong><br>把下方 JSON 填进客户端的 MCP 配置（Cursor：设置 → MCP → 添加服务器）。<strong>路径不用手改</strong>：下方 JSON 里的 <code>command</code> 只是示意 —— 真正要用的是 <strong>双击 <code>AI-Fbowser-Mcp.exe</code></strong>（或运行 <code>AI-Fbowser-Mcp.exe --print-config</code>）按你本机真实路径打印出来的同一段 JSON，直接复制即可。</div>
+  <div class="step"><strong>完全重启客户端</strong><br>彻底退出再打开（不是重开对话），工具列表即出现 <code>ai-browser</code>。</div>
+  <div class="step"><strong>调用工具</strong><br>在对话中让 AI 使用 <code>browser_navigate</code> 打开网页；读操作如 <code>browser_get_title</code> 默认 sync-wait 一次返回。</div>
+</div>
+<pre id="cursorConfig">{
+  "mcpServers": {
+    "ai-browser": {
+      "command": "&lt;本机 exe 真实完整路径 —— 由双击 / --print-config 自动填好&gt;",
+      "args": ["--mcp-stdio"]
+    }
+  }
+}</pre>
+<button class="btn" onclick="copyBlock('cursorConfig', this)">复制客户端配置</button>
+<div class="alert warn">上面 <code>command</code> 里的尖括号是<strong>说明</strong>，不是可用路径。请用 <code>--print-config</code>（或双击）打印出来的那一份，<strong>不要手写 <code>D:/你的解压路径</code> 这类占位符</strong>。<br><code>--print-config</code> 只打印配置就退出：<strong>不启动服务、不建浏览器、不占桌面</strong>；等义开关 <code>--dump-config</code>，可 <code>&gt; mcp.json</code> 落盘。</div>
+</section>
+
+<!-- ── 文档清单（编译输出） ── -->
+<section id="skillbooks">
+<h2>文档清单</h2>
+<p>以下 Markdown 随编译复制到 exe 同目录 <code>docs/</code>，直接打开文件即可阅读：</p>
+<div class="btn-row">
+  <a class="btn" href="客户使用手册.md" target="_blank">客户使用手册.md</a>
+  <a class="btn" href="MCP工具配置说明书.md" target="_blank">MCP工具配置说明书.md</a>
+  <a class="btn" href="README.md" target="_blank">README.md</a>
+</div>
+<div class="table-wrap"><table>
+  <tr><th>文档</th><th>受众</th><th>内容</th></tr>
+  <tr><td><a href="客户使用手册.md">客户使用手册.md</a></td><td><strong>终端客户</strong></td><td>安装（无需激活）、Cursor 接入、话术示例、FAQ</td></tr>
+  <tr><td><a href="MCP工具配置说明书.md">MCP工具配置说明书.md</a></td><td>部署 / 集成</td><td>mcp_config 全字段、客户端接入</td></tr>
+  <tr><td><code>mcp_help</code></td><td>开发</td><td>工具动态清单（在对话中调用该工具查询）</td></tr>
+</table></div>
+<div class="alert info">火山编译附属文件：<code>docs/</code>、<code>mcp_config.json</code>、<code>workflows/</code> 自动输出到 linker。</div>
+</section>
+
+<!-- ── 架构 ── -->
+<section id="architecture">
+<h2>架构说明</h2>
+<pre><code>Cursor / Claude / 任意 MCP 客户端
+        │  stdio（逐行 JSON-RPC 2.0）
+        ▼
+AI-Fbowser-Mcp.exe（MCP_Stdio.wsv 通道 → MCP_Server.wsv 分发）
+        │
+        ▼
+Google Chromium（CEF）浏览器（内嵌）
+</code></pre>
+<ul>
+  <li><strong>MCP_Stdio.wsv</strong> — stdio 通道，逐行 JSON-RPC 收发</li>
+  <li><strong>MCP_Server.wsv</strong> — JSON-RPC 分发、sync-wait、batch、工具注册表</li>
+  <li><strong>MCP_Server_Core / Form / VIP / System / Workflow</strong> — 模块化工具分派（Core 导航/CDP、Form 填表、VIP 高级功能、System 元工具、Workflow 步骤链）</li>
+  <li><strong>MCP_BrowserEvents.wsv</strong> — 网络/控制台/导航 Hook、事件记录</li>
+  <li><strong>MCP_Callbacks.wsv</strong> — JS/高级功能异步回调、任务结果存储、DOM 语义失败检测</li>
+</ul>
+<p>自有程序同样以 stdio 拉起（spawn）本 exe，参数 <code>--mcp-stdio</code>，无端口可连。</p>
+</section>
+
+<!-- ── MCP 协议 ── -->
+<section id="protocol">
+<h2>MCP 协议流程</h2>
+<p>以下消息均在 stdio 通道上以逐行 JSON-RPC 传输，没有 HTTP 端点。</p>
+<h3>1. initialize</h3>
+<pre><code>{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","clientInfo":{"name":"my-app","version":"1.0"}}}</code></pre>
+<h3>2. notifications/initialized</h3>
+<pre><code>{"jsonrpc":"2.0","method":"notifications/initialized"}</code></pre>
+<h3>3. tools/list — 获取工具</h3>
+<pre><code>{"jsonrpc":"2.0","id":2,"method":"tools/list"}</code></pre>
+<h3>4. tools/call — 调用工具</h3>
+<pre><code>{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"browser_navigate","arguments":{"url":"https://example.com"}}}</code></pre>
+<h3>直接命令（可选）</h3>
+<p>也可将 <code>method</code> 直接设为工具名，跳过 <code>tools/call</code> 包装：</p>
+<pre><code>{"jsonrpc":"2.0","id":4,"method":"browser_get_title","params":{"browser_id":1}}</code></pre>
+<p>工具名同时支持 <code>browser.navigate</code> 与 <code>browser_navigate</code> 双路由。</p>
+</section>
+
+<!-- ── Cursor ── -->
+<section id="cursor">
+<h2>MCP 客户端接入</h2>
+<p>Cursor、Claude Desktop、Cline、Windsurf 等任何 MCP 客户端配置方式相同：<code>command</code> 填 exe 路径，<code>args</code> 填 <code>--mcp-stdio</code>。</p>
+<pre><code>{
+  "mcpServers": {
+    "ai-browser": {
+      "command": "<本机 exe 真实完整路径 —— 由 --print-config 输出>",
+      "args": ["--mcp-stdio"]
+    }
+  }
+}</code></pre>
+<p><strong>不要手填路径：</strong>运行 <code>AI-Fbowser-Mcp.exe --print-config</code>（或直接双击 exe），它会按<strong>你本机的真实路径</strong>打印好上面这段 JSON，整段复制即可。上面 <code>&lt;…&gt;</code> 里是说明文字，不是可用路径。</p>
+<p>拿到路径后要手改时：正斜杠 <code>/</code> 或双反斜杠皆可，再彻底退出并重启客户端。</p>
+<div class="alert warn">不需要 node、不需要端口、不需要任何环境变量；程序由 MCP 客户端自动拉起。</div>
+</section>
+
+<!-- ── 工具分类 ── -->
+<section id="tools">
+<h2>工具分类</h2>
+<p>完整工具清单在对话中调用 <code>mcp_help</code> 查询。主要分类如下：</p>
+<div id="toolCategoryGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+  <div class="card" style="padding:12px 14px;margin:0"><strong>导航与页面</strong><br><span style="color:var(--muted);font-size:.85em">navigate / get_url / get_title / reload …</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>JS / DOM / 填表</strong><br><span style="color:var(--muted);font-size:.85em">execute_js / evaluate / dom_query / fill_* …</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>输入 / 触摸 / 编辑</strong><br><span style="color:var(--muted);font-size:.85em">mouse_* / key_event / touch_* / edit_* …</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>网络 / CDP / 调试</strong><br><span style="color:var(--muted);font-size:.85em">network / intercept / cdp_call / debugger_* …</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>指纹 / 内核开关</strong><br><span style="color:var(--muted);font-size:.85em">fingerprint_* / vip_set_css …</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>逆向分析</strong><br><span style="color:var(--muted);font-size:.85em">reverse_* / kernel_reverse_* …</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>工作流 / 编排</strong><br><span style="color:var(--muted);font-size:.85em">workflow_list / get / run / stop</span></div>
+  <div class="card" style="padding:12px 14px;margin:0"><strong>系统 / 其他</strong><br><span style="color:var(--muted);font-size:.85em">mcp_status / mcp_help / batch / ping …</span></div>
+</div>
+
+<h3>系统 / 元工具</h3>
+<div class="table-wrap"><table>
+  <tr><th>工具</th><th>说明</th></tr>
+  <tr><td><code>mcp_status</code></td><td>服务器状态</td></tr>
+  <tr><td><code>mcp_help</code></td><td>帮助与工具清单</td></tr>
+  <tr><td><code>mcp_result</code></td><td>查询异步任务结果</td></tr>
+  <tr><td><code>ping</code></td><td>连通性检查</td></tr>
+  <tr><td><code>batch</code></td><td>批量执行；默认 sync-wait 子命令</td></tr>
+  <tr><td><code>aliases</code></td><td>短名别名列表</td></tr>
+  <tr><td><code>workflow_list</code></td><td>工作流 JSON 文件列表</td></tr>
+  <tr><td><code>workflow_get</code></td><td>获取工作流定义</td></tr>
+  <tr><td><code>workflow_run</code></td><td>顺序执行步骤（默认 sync-wait）</td></tr>
+  <tr><td><code>workflow_stop</code></td><td>中止运行中工作流</td></tr>
+</table></div>
+
+<h3>导航与页面</h3>
+<p><code>browser_navigate</code> <code>browser_get_url</code> <code>browser_get_title</code> <code>browser_reload</code> <code>browser_back</code> <code>browser_forward</code> <code>browser_list</code> <code>browser_status</code> …</p>
+
+<h3>JS / DOM / 填表</h3>
+<p><code>browser_execute_js</code> <code>browser_evaluate</code> <code>browser_dom_query</code> <code>browser_fill_set_value</code> <code>browser_fill_click</code> …</p>
+
+<h3>网络 / 拦截 / 调试</h3>
+<p><code>browser_network</code> <code>browser_collect</code> <code>browser_intercept</code> <code>browser_cdp_call</code> <code>browser_event</code> <code>browser_wait</code> …</p>
+
+<h3>高级功能 <span class="tag vip">高级</span></h3>
+<p><code>browser.mouse_click/move/wheel</code> <code>browser.key_event</code> <code>browser.set_proxy</code> 已内置优先路径。独有工具: <code>browser_vip_mouse_press/release</code> <code>browser_vip_key_input/type</code> <code>browser_vip_fingerprint_*</code> 指纹/扩展等。</p>
+</section>
+
+<!-- ── Sync-Wait / 异步 ── -->
+<section id="async">
+<h2>Sync-Wait / 异步任务</h2>
+<p>v2.5 起，常用读操作默认 <strong>sync-wait</strong>：在同一次 <code>tools/call</code> 内轮询 async 任务并返回结果，响应可含 <code>"_sync_waited":true</code>。无需客户端二次 <code>mcp_result</code>。</p>
+<div class="table-wrap"><table>
+  <tr><th>参数</th><th>说明</th></tr>
+  <tr><td><em>（默认）</em></td><td>白名单工具自动 sync-wait</td></tr>
+  <tr><td><code>async_only: true</code></td><td>强制纯异步，立即返回 <code>task_id</code></td></tr>
+  <tr><td><code>sync_wait: true</code></td><td>对非白名单工具也启用 sync-wait</td></tr>
+  <tr><td><code>max_ms: N</code></td><td>自定义等待超时（毫秒）</td></tr>
+</table></div>
+<p><strong>默认 sync-wait 白名单</strong>：<code>get_title</code>、<code>evaluate</code>、<code>console_eval</code>、<code>dom_query</code>、<code>dom_set_value</code>、<code>dom_click</code>、<code>get_frames</code>、<code>frame_names</code>、<code>fill_exists</code>、<code>fill_attr_get</code>；<code>get_text</code> / <code>dom_get_html</code> 仅当传入 <code>selector</code> 时；debugger 全套。</p>
+<p><strong>batch</strong>：默认对子命令自动跟随 async 结果；子命令失败时外层 <code>success:false</code>；batch 级 <code>async_only:true</code> 关闭跟随。</p>
+<h3>纯异步轮询</h3>
+<p>非白名单或显式 <code>async_only:true</code> 时，返回 <code>task_id</code>（格式 <code>task_&lt;毫秒&gt;_&lt;盐&gt;_&lt;计数&gt;</code>），通过 <code>mcp_result</code> 查询：</p>
+<pre><code>{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"mcp_result","arguments":{"request_id":"task_xxx"}}}</code></pre>
+</section>
+
+<!-- ── 工作流 ── -->
+<section id="workflow">
+<h2>工作流 workflow</h2>
+<p>将多步 MCP 调用编排为 JSON 步骤链，存放于 exe 同目录 <code>workflows/</code>（环境变量 <code>AI_BROWSER_WORKFLOWS_DIR</code> 可覆盖）。</p>
+<div class="table-wrap"><table>
+  <tr><th>工具</th><th>说明</th></tr>
+  <tr><td><code>workflow_list</code></td><td>列出 <code>workflows/*.json</code></td></tr>
+  <tr><td><code>workflow_get</code></td><td>参数 <code>name</code> 或 <code>file</code>，返回定义 JSON</td></tr>
+  <tr><td><code>workflow_run</code></td><td>参数 <code>name</code> / <code>file</code> / <code>definition</code> / <code>steps</code>；步骤默认 sync-wait</td></tr>
+  <tr><td><code>workflow_stop</code></td><td>中止运行中工作流；空闲调用清除停止标志</td></tr>
+</table></div>
+<p><strong>加载优先级</strong>：<code>name</code>/<code>file</code> 优先读磁盘文件；内联 <code>definition</code> 仅作 fallback（空 <code>definition:{}</code> 不会拦截文件加载）。</p>
+<h3>步骤 JSON 示例</h3>
+<pre><code>[
+  { "tool": "ping", "args": {} },
+  { "delay_ms": 300 },
+  { "tool": "browser_navigate", "args": { "url": "about:blank" } },
+  { "tool": "browser_wait", "args": { "what": "load_end", "max_ms": 5000 } }
+]</code></pre>
+<p>每步可选 <code>on_error</code>：<code>"stop"</code>（默认）或 <code>"continue"</code>。内置示例：<code>hello.json</code>、<code>ping_navigate.json</code>。</p>
+</section>
+
+<!-- ── 事件 ── -->
+<section id="events">
+<h2>事件监控与数据采集</h2>
+<p><code>browser_collect</code> 统一入口：网络/控制台/场景预备/事件 Hook。查询导航等事件用 <code>browser_event</code>。</p>
+<h3>场景预备</h3>
+<pre><code>{"name":"browser_collect","arguments":{"action":"reverse_prepare","clear":true}}
+{"name":"browser_collect","arguments":{"action":"debug_prepare"}}
+{"name":"browser_collect","arguments":{"action":"automation_prepare"}}</code></pre>
+<h3>事件监控</h3>
+<pre><code>{"name":"browser_collect","arguments":{"action":"event_all_enable"}}
+{"name":"browser_event","arguments":{"event_type":"navigate"}}</code></pre>
+<p>支持 <code>event_load_enable</code>、<code>event_resource_enable</code>、<code>event_dialog_enable</code> 等单项；<code>event_all_disable</code> 批量关闭。详见 <code>tools/list</code> 动态清单与 <code>docs/</code> 目录下的既有文档。</p>
+<p><strong>默认开启</strong>：载入 / 生命周期 / 标题 / 下载 4 类；进度 / 资源 / 对话框 / 全屏 / 图标 / 查找 / 框架 / 键盘焦点 / 应用事件默认关闭。<code>event_all_enable</code> 开启 <strong>28 项</strong>（13 事件族 + 3 日志 + 12 扩展族），与 <code>browser_kernel_events_all</code> 的集合完全一致；<code>event_all_disable</code> 逐项对称关闭。如需精细控制，仍可用单项 <code>event_resource_enable</code> / <code>event_focus_enable</code> 等。</p>
+</section>
+
+<!-- ── CDP ── -->
+<section id="cdp">
+<h2>CDP 调试</h2>
+<div class="alert warn"><strong>注意：</strong>本服务<strong>不提供</strong> Chrome 原生 <code>/devtools/browser/{id}</code> WebSocket 代理。CDP 请使用 MCP 工具：</div>
+<ul>
+  <li><code>browser_cdp_call</code> — 发送 CDP 命令</li>
+  <li><code>browser_cdp_event</code> — 监听 CDP 事件</li>
+  <li><code>browser_vip_enable_devtools_observer</code> — 高级 DevTools 消息监听</li>
+</ul>
+</section>
+
+<!-- ── 配置 ── -->
+<section id="config">
+<h2>配置文件 mcp_config.json</h2>
+<p>放在 exe 同目录，启动时自动加载。完整说明见 <a href="MCP工具配置说明书.md">MCP工具配置说明书.md</a>。</p>
+<pre><code>{
+  "enable_network_log": true,
+  "enable_console_log": false,
+  "enable_response_cache": false,
+  "network_log_max_bytes": 262144,
+  "auto_download_save": true,
+  "auto_dismiss_js_dialog": false,
+  "window_topmost": true,
+  "start_hidden": true,
+  "exit_on_window_close": false
+}</code></pre>
+<p><code>start_hidden</code>（默认 <code>true</code>）= 主窗口创建后立即隐藏、不占桌面，<strong>写 <code>false</code> 才保持可见</strong>；<code>exit_on_window_close</code>（默认 <code>false</code>）= 点窗口 X <strong>只隐藏窗口</strong>、MCP 继续跑，<strong>写 <code>true</code> 才随 X 整体退出</strong>。两者都由命令行 <code>--hidden</code> / <code>--visible</code> 覆盖。</p>
+<p>文件里若出现 <code>port</code> / <code>bind_address</code> / <code>disable_auth</code> / <code>api_key</code>，那是早期 HTTP 模式的遗留：现行版本不监听端口，这些键<b>读取但无实际作用</b>（<code>bind_address</code> 非空只会打印一条安全警告），可直接删除。</p>
+<p>⚠ 但 <code>rate_limit_per_minute</code> <b>不在其列 —— 它至今仍然生效</b>：<code>0</code>（默认）= 不限速；<code>&gt;0</code> 时按每分钟上限限流，超限请求会以 <code>-32000</code>「请求过于频繁」被拒（附 <code>Retry-After</code>）。</p>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq">
+<h2>常见问题</h2>
+<h3>客户端看不到 ai-browser</h3>
+<p>确认 MCP 配置里 <code>command</code> 是实际 exe 路径、<code>args</code> 填 <code>--mcp-stdio</code>，并彻底退出重启客户端（不是重开对话）。</p>
+<h3>需要卡密 / 提示激活吗？</h3>
+<p><strong>不需要。</strong>本版为免费发布，程序内没有任何激活前置条件，也没有 `--activate-card` 之类的命令。</p>
+<h3>browsers: 0</h3>
+<p>主窗口浏览器尚未创建，稍等几秒重试，或让 AI 调用 <code>browser_create</code> 主动创建。</p>
+<h3>工具返回 task_id 但 mcp_result 为空</h3>
+<p>若未设 <code>async_only:true</code>，白名单工具应已 sync-wait 直接返回。纯异步任务可能仍在执行，稍等后重试。</p>
+<h3>程序怎么启动、怎么退出？</h3>
+<p>由 MCP 客户端自动拉起、随客户端退出，不需要手动双击。要单独退出可让 AI 调用 <code>browser_shutdown</code>。</p>
+<h3>浏览器窗口在哪？我怎么看不到？</h3>
+<p><strong>这是正常的 —— 本版默认隐藏窗口</strong>（<code>mcp_config.json</code> 的 <code>start_hidden</code> 默认为 <code>true</code>）：主窗口创建后立即隐藏、不占桌面，服务在后台照常干活。</p>
+<ul>
+  <li><strong>想让它一直显示</strong>：启动时加 <code>--visible</code>（等义 <code>--show-window</code>），或把配置里 <code>start_hidden</code> 写成 <code>false</code>。</li>
+  <li><strong>只是想看一眼</strong>：让 AI 调用 <code>browser_show_window {visible:true}</code>；<code>{visible:false}</code> 收回。</li>
+  <li><strong>手动关掉窗口</strong>：默认只<strong>隐藏窗口</strong>（<code>exit_on_window_close</code> 默认 <code>false</code>），桌面立刻干净而 MCP 继续可用。想「点 X = 整个退出」就把 <code>exit_on_window_close</code> 写成 <code>true</code>。</li>
+  <li><strong>命令行优先级</strong>：命令行开关 &gt; <code>mcp_config.json</code> &gt; 内置默认（隐藏）。</li>
+</ul>
+<div class="alert info">窗口隐藏时坐标类输入（<code>mouse_wheel</code> / <code>touch_*</code>）会按设计快速失败、<code>mouse_move</code> 会变慢 —— 那是后台节流，不是通道故障。先 <code>browser_show_window {visible:true}</code> 再重试即可。</div>
+<h3>文档打不开</h3>
+<p>直接打开 exe 同目录 <code>docs/</code> 下的 Markdown 文件。程序不监听端口，不提供网页。</p>
+<h3>页面卡住 / MCP 超时</h3>
+<p>多见于 debugger 暂停未恢复。调用 <code>browser_debugger_resume</code>，或调用 <code>browser_restore_gui</code>、<code>browser_reload</code>。</p>
+<h3>POST 加密参数扫描失败</h3>
+<p>先解除 debugger 暂停，再用 <code>browser_collect reverse_prepare</code> + <code>browser_inject</code> persist Hook 扫描。勿并行跑多个 MCP 脚本。</p>
+</section>
+
+<div class="footer-bar">
+  <p>AI浏览器 MCP Server v3.3.4 · 免费发布(仅提供成品, 不开放源码) · 交流群 280742938 · QQ 212577526 · 微信 XSMZAS1</p>
+  <p>348 个浏览器自动化工具 · 标准 MCP over stdio · 不监听端口</p>
+  <p>Copyright (C) 2026 小刀(Xiaodao). 保留所有权利。打个广告：更多定制功能请联系 QQ 212577526 / VX XSMZAS1</p>
+</div>
+
+</main>
+</div>
+<script src="assets/docs.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # 能力清单 / Capabilities
 
-**工具总数：348**（由发布版二进制 `tools/list` **实际导出**，非人工罗列）。
+**工具总数：349**（由发布版二进制 `tools/list` **实际导出**，非人工罗列）。
 
 ## 按域统计（实测计数，仅列 ≥3 个工具的域）
 | 域（工具名前缀） | 数量 |
@@ -27,7 +27,7 @@
 | `browser_clear_*` | 3 |
 | `browser_create_*` | 3 |
 
-## 全量工具名（字母序，348 个）
+## 全量工具名（字母序，349 个）
 ```
 aliases
 aliases=1
@@ -459,6 +459,8 @@ browser_window_info
 browser_window=1
 license_status
 license_status=1
+mcp_doctor
+mcp_doctor=1
 mcp_help
 mcp_help=1
 mcp_result
