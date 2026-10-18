@@ -43,8 +43,9 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 | `00-checksums-sha256-md5.csv` | 资产 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-编译 `0 错误 0 警告`（x64）；回归覆盖 **349 工具全量**（`no-reply=0`/`bad-json=0`）、帧族 P1–P8、
-CL 失配两向、工作池饱和读线程快答（`tools/list` 94ms，修前 11267ms）、CDP 层诚实性、客户端矩阵 7/7、浸泡 422 次作业无回包 0。
+编译 `0 错误 0 警告`（x64）；349 工具全量扫描发现 2 个“暂停态无回包”，已修复并完成专项回归
+（paused guard / cancel / touch / batch / retry），另有帧族 P1–P8、CL 失配两向、工作池饱和读线程快答
+（`tools/list` 94ms，修前 11267ms）、CDP 层诚实性、客户端矩阵 7/7 等历史回归证据。
 
 ## 已知边界 / Known limits
 - exe **未做代码签名**（SmartScreen 会提示）· no code signing yet
