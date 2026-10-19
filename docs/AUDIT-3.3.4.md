@@ -126,6 +126,8 @@
 | `browser_resources` x86 回调 ABI | x86 不再返回非法片段；明确 `metrics_available:false`，x64 保留完整指标 |
 | 截图 / PDF 父目录 | `save_to`/`path` 自动创建父目录；专项 4/4 |
 | 堆快照 | `browser_reverse_heap` snapshot 改为异步提交，约 30–95ms 返回，不占满工作池 |
+| 浏览器下载落盘 | 运行目录尾斜杠造成 `browser\\Downloads`，CEF 报完成后文件缺失；统一规范化路径后 x64/x86 均实际写出 `Downloads\audit.txt` |
 | 暂停/CDP 状态污染 | 测试与运行建议按暂停/恢复、CDP 毒化后重启隔离；最终扫描 0 无回包 |
 | 虚拟 UA | 默认安全拒绝并在约 1 秒内返回原因；显式 `confirm:true` 才进入高风险路径 |
 | 32 位交付 | 完整 32 位 CEF 运行时 + 32 位 sqlite 依赖；`ping=3.3.4`、349 工具、正常页操作通过 |
+| 宣传与仓库布局 | 宣传图统一为 349 工具、x64/x86、stdio-only、真实 CEF 口径；发布仓仅含成品与文档，源码只在私密仓 |

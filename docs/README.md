@@ -15,6 +15,11 @@
 | [index.html](./index.html) | 所有人 | 离线 HTML 完整文档（本机打开 `docs\index.html`；注意与 exe 同级那个 `index.html` 欢迎页不是同一份） |
 | [assets/](./assets/) | — | 样式与 docs.js |
 
+发布仓还提供：
+
+- [宣传图规格](../assets/promo/README.md)：主海报、六卖点、双架构、CEF、免费发布与行业场景
+- 发布仓只提供成品与文档；源码维护在私密源码仓，不公开分发
+
 ## 工具清单的权威来源
 
 以运行时的 **MCP `tools/list`** 为准（由 AI 客户端自动拉取）。
