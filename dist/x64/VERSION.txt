@@ -1,0 +1,4 @@
+Xiaodao AI-Browser MCP Server v3.3.6 (x64)
+Tool count: 351
+EXE MD5: 91A89AC371493B03D37BFD3476B879F4
+Full runtime package: GitHub Releases v3.3.6

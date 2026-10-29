@@ -1,7 +1,7 @@
 <p align="center"><img src="assets/logo.png" width="96" alt="Xiaodao AI-Browser MCP logo"></p>
-<p align="center"><img src="assets/promo/xiaodao-mcp-banner-1200x630.png" alt="Xiaodao AI-Browser MCP Server — Windows browser automation MCP server with 349 tools, Chromium/CEF kernel, stdio transport" width="100%"></p>
+<p align="center"><img src="assets/promo/xiaodao-mcp-banner-1200x630.png" alt="Xiaodao AI-Browser MCP Server — Windows browser automation MCP server with 351 tools, Chromium/CEF kernel, stdio transport" width="100%"></p>
 
-**Xiaodao AI-Browser MCP Server（小刀 AI 浏览器 MCP 服务端）** is a local **browser automation MCP server for Windows** built on the **Chromium / CEF** kernel. It speaks **MCP over stdio** (no ports, no daemon) and exposes **349 tools** covering navigation, extraction, form filling, screenshots/PDF, **network capture & HAR export**, **Chrome DevTools Protocol (CDP)** control, **JavaScript debugging & reverse engineering** (function hooks, hot patching, precise coverage, obfuscation detection), **anti-detect fingerprinting**, and **kernel-level CEF events**.
+**Xiaodao AI-Browser MCP Server（小刀 AI 浏览器 MCP 服务端）** is a local **browser automation MCP server for Windows** built on the **Chromium / CEF** kernel. It speaks **MCP over stdio** (no ports, no daemon) and exposes **351 tools** covering navigation, extraction, form filling, screenshots/PDF, **network capture & HAR export**, **Chrome DevTools Protocol (CDP)** control, **JavaScript debugging & reverse engineering** (function hooks, hot patching, precise coverage, obfuscation detection), **anti-detect fingerprinting**, and **kernel-level CEF events**.
 关键词 / Keywords: MCP server, browser automation, Chromium, CEF, CDP, Chrome DevTools Protocol, web scraping, HAR, Playwright alternative, Puppeteer alternative, reverse engineering, JS debugging, anti-detect, fingerprint, headless-less local browser, Windows, Claude Desktop, Cursor, Trae, DeepSeek Harness, 浏览器自动化, 逆向, 指纹, 反检测.
 
 ![release](https://img.shields.io/github/v/release/AI-XiaoDao/xiaodao-ai-browser-mcp?label=release) ![verify](https://github.com/AI-XiaoDao/xiaodao-ai-browser-mcp/actions/workflows/verify-release.yml/badge.svg) ![license](https://img.shields.io/badge/license-proprietary-blue) ![platform](https://img.shields.io/badge/platform-Windows%2010%2F11%20x64%20%7C%20x86-lightgrey)
@@ -20,16 +20,16 @@
 
 # Xiaodao AI-Browser MCP Server · 小刀 AI 浏览器 MCP Server
 
-Windows 本地浏览器自动化 MCP 服务端 —— **Google Chromium / CEF** 内核、仅 stdio 通道（`--mcp-stdio`）、**349** 个工具。
-A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349 tools).
+Windows 本地浏览器自动化 MCP 服务端 —— **Google Chromium / CEF** 内核、仅 stdio 通道（`--mcp-stdio`）、**351** 个工具。
+A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351 tools).
 
-**最新版本 / Latest: `v3.3.4`** → 见 [Releases](../../releases)。本仓只发布成品；源码维护在私密仓 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`，不在 Release 或本仓公开。
+**最新版本 / Latest: `v3.3.6`** → 见 [Releases](../../releases)。本仓发布成品；源码维护在 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
 
 ## 快速下载 / Quick download
 | 系统 | 选择 | 包内内容 |
 |---|---|---|
-| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` | 349 工具 + 完整 64 位 CEF 运行库 + Logo |
-| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.4-x86.zip` | 349 工具 + 完整 32 位 CEF 运行库 + Logo |
+| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo |
+| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo |
 
 不要混用两个包：CEF、sqlite 与原生 DLL 都有位数要求。
 
@@ -54,20 +54,16 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.4-x64.zip` | 64 位成品（349 工具，完整 CEF 运行库与 Logo；165,655,537 B；内层 exe MD5 `8FFFCF297EEB2B0FB83A5B93AAA3AA21`，9,285,120 B） |
-| `xiaodao-ai-browser-mcp-v3.3.4-x86.zip` | 32 位成品（349 工具，完整 32 位 CEF 运行库与 Logo；144,073,249 B；内层 exe MD5 `7F5B5BE9950B6B28400B9C4A08A76C6E`，7,684,608 B） |
+| `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库与 Logo；172,626,136 B；内层 exe MD5 `91A89AC371493B03D37BFD3476B879F4`，9,859,584 B） |
+| `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库与 Logo；149,765,336 B；内层 exe MD5 `1D935680DB23FFD11B33CC82ED4924DF`，8,166,400 B） |
 | `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-`v3.3.4` 最终构建：x64 / x86 均为 **0 错误、0 警告**。
+`v3.3.6` 最终构建：x64 / x86 均为 **0 错误、0 警告**。
 
-- **x64 最终全量扫描：335 成功、14 个明确失败、0 无回包、0 进程退出**。14 个失败均属于安全确认、缺失外部插件、内核明确不支持或需要特定暂停现场的负向用例，不是协议挂起。
-- **x86 最终全量扫描：334 成功、15 个明确失败、0 无回包、0 进程退出**（包含被移除的测试夹具项；其余失败性质同上）。
-- `browser_resources` 的 x86 回调 ABI 问题已修复：x86 返回 `metrics_available:false`，不再把未知统计伪装成可用；x64 继续返回完整指标。
-- 截图、PDF 的 `save_to/path` 现在自动创建父目录；`browser_reverse_heap` 的 snapshot 改为异步提交，单次约 30–95ms 返回，不再占死工作池。
-- 下载路径已消除运行目录尾斜杠造成的双反斜杠；x64/x86 均实测 `Downloads\audit.txt` 落盘成功。
-- `browser_fingerprint_ua` 默认安全拒绝并在约 1 秒内返回原因；只有显式 `confirm:true` 才进入高风险渲染器切换路径。
-- `tools/list` 读线程快答、CDP 诚实性、客户端矩阵 7/7、取消通知、帧族与工作池回归证据保留在 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
+- 本轮 `matrix` 客户端矩阵 **7/7 通过**，`transport` **3/3 通过**，`tools/list` 实测 **351** 个工具。
+- 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构，客户端覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。
+- CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；完整审计证据保留在 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
 
 ## 已知边界 / Known limits
 
@@ -83,6 +79,8 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 349
 
 ```
 README.md                  本文件（中英双语）
+dist/x64/AI-Fbowser-Mcp.exe  v3.3.6 64 位 exe 本体
+dist/x86/AI-Fbowser-Mcp.exe  v3.3.6 32 位 exe 本体
 docs/QUICKSTART_ZH.md     快速上手（中文）
 docs/QUICKSTART_EN.md     Quick Start (English)
 docs/CHANGELOG.md         更新日志
@@ -91,11 +89,11 @@ docs/KNOWN-LIMITS.md      已知边界
 examples/mcp_config.example.json  客户端配置示例（含 UTF-8 开关）
 assets/                    图标与宣传图（assets/promo）
 ```
-> 二进制成品不进入 Git 历史，全部随 [Releases](../../releases) 分发。
+> exe 本体在 `dist/x64` / `dist/x86`；完整运行库压缩包不进入 Git 历史，随 [Releases](../../releases) 分发。
 > 发布仓只包含成品、文档、测试与宣传资源；源码不会进入发布仓。
 
 ## 能力与优势 / Capabilities & Advantages
 
-- **能力清单（按域归类，349 工具）**：[docs/CAPABILITIES.md](docs/CAPABILITIES.md)
+- **能力清单（按域归类，351 工具）**：[docs/CAPABILITIES.md](docs/CAPABILITIES.md)
 - **优势与差异化（每条均可核验）**：[docs/ADVANTAGES.md](docs/ADVANTAGES.md)
 
