@@ -159,7 +159,8 @@ Google Chromium（CEF）浏览器（内嵌）
 <!-- ── Cursor ── -->
 <section id="cursor">
 <h2>MCP 客户端接入</h2>
-<p>Cursor、Claude Desktop、Cline、Windsurf 等任何 MCP 客户端配置方式相同：<code>command</code> 填 exe 路径，<code>args</code> 填 <code>--mcp-stdio</code>。</p>
+<p>Cursor、Claude Desktop、Cline、Windsurf、Trae、Cherry Studio、Roo Code、Continue 等任何支持 MCP 的客户端配置方式相同：<code>command</code> 填 exe 路径，<code>args</code> 填 <code>--mcp-stdio</code>。</p>
+<p>DeepSeek Harness (DSH) 使用 <code>~/.dsh/profiles/&lt;profile&gt;/cordis.patch.yml</code> 的 YAML patch；Codex 使用 TOML。DeepSeek 官方聊天端或不提供 MCP 入口的 WorkBuddy 版本无法直接挂载本服务。</p>
 <pre><code>{
   "mcpServers": {
     "ai-browser": {
@@ -170,7 +171,7 @@ Google Chromium（CEF）浏览器（内嵌）
 }</code></pre>
 <p><strong>不要手填路径：</strong>运行 <code>AI-Fbowser-Mcp.exe --print-config</code>（或直接双击 exe），它会按<strong>你本机的真实路径</strong>打印好上面这段 JSON，整段复制即可。上面 <code>&lt;…&gt;</code> 里是说明文字，不是可用路径。</p>
 <p>拿到路径后要手改时：正斜杠 <code>/</code> 或双反斜杠皆可，再彻底退出并重启客户端。</p>
-<div class="alert warn">不需要 node、不需要端口、不需要任何环境变量；程序由 MCP 客户端自动拉起。</div>
+<div class="alert warn">不需要 node、不需要端口、不需要任何环境变量；程序由 MCP 客户端自动拉起。当前构建仅 stdio，不支持远程服务器部署。</div>
 </section>
 
 <!-- ── 工具分类 ── -->
@@ -227,7 +228,7 @@ Google Chromium（CEF）浏览器（内嵌）
   <tr><td><code>sync_wait: true</code></td><td>对非白名单工具也启用 sync-wait</td></tr>
   <tr><td><code>max_ms: N</code></td><td>自定义等待超时（毫秒）</td></tr>
 </table></div>
-<p><strong>默认 sync-wait 白名单</strong>：<code>get_title</code>、<code>evaluate</code>、<code>console_eval</code>、<code>dom_query</code>、<code>dom_set_value</code>、<code>dom_click</code>、<code>get_frames</code>、<code>frame_names</code>、<code>fill_exists</code>、<code>fill_attr_get</code>；<code>get_text</code> / <code>dom_get_html</code> 仅当传入 <code>selector</code> 时；debugger 全套。</p>
+<p><strong>默认 sync-wait 白名单（完整）</strong>：<code>get_title</code>、<code>evaluate</code>、<code>execute_js</code>、<code>console_eval</code>、<code>get_url</code>、<code>get_id</code>、<code>status</code>、<code>is_loading</code>、<code>is_muted</code>、<code>can_navigate</code>、<code>get_zoom</code>、<code>loading_info</code>、<code>popup_info</code>、<code>window_info</code>、<code>dom_query</code>、<code>dom_set_value</code>、<code>dom_click</code>、<code>dom_inner_html</code>、<code>dom_checked</code>、<code>dom_selected</code>、<code>dom_rect</code>、<code>get_frames</code>、<code>frame_names</code>、<code>fill_exists</code>、<code>fill_attr_get</code>、<code>fill_set_value</code>、<code>fill_click</code>、<code>get_cookies</code>、<code>get_all_cookies</code>、<code>screenshot</code>、<code>get_source</code>、<code>cdp_call</code>/<code>cdp</code>/<code>cdp_event</code>/<code>event</code>、<code>dom_select</code>/<code>extract</code>/<code>view_source</code>/<code>scrape</code>、<code>vip_dom_get_document</code>/<code>vip_dom_search</code>/<code>reverse_cookie_sources</code>、debugger 全套；<code>navigate</code>/<code>reload</code> 按 <code>wait_for_load</code>，<code>get_text</code>/<code>dom_get_html</code> 仅当传入 <code>selector</code>。</p>
 <p><strong>batch</strong>：默认对子命令自动跟随 async 结果；子命令失败时外层 <code>success:false</code>；batch 级 <code>async_only:true</code> 关闭跟随。</p>
 <h3>纯异步轮询</h3>
 <p>非白名单或显式 <code>async_only:true</code> 时，返回 <code>task_id</code>（格式 <code>task_&lt;毫秒&gt;_&lt;盐&gt;_&lt;计数&gt;</code>），通过 <code>mcp_result</code> 查询：</p>
@@ -323,7 +324,7 @@ Google Chromium（CEF）浏览器（内嵌）
   <li><strong>手动关掉窗口</strong>：默认只<strong>隐藏窗口</strong>（<code>exit_on_window_close</code> 默认 <code>false</code>），桌面立刻干净而 MCP 继续可用。想「点 X = 整个退出」就把 <code>exit_on_window_close</code> 写成 <code>true</code>。</li>
   <li><strong>命令行优先级</strong>：命令行开关 &gt; <code>mcp_config.json</code> &gt; 内置默认（隐藏）。</li>
 </ul>
-<div class="alert info">窗口隐藏时坐标类输入（<code>mouse_wheel</code> / <code>touch_*</code>）会按设计快速失败、<code>mouse_move</code> 会变慢 —— 那是后台节流，不是通道故障。先 <code>browser_show_window {visible:true}</code> 再重试即可。</div>
+<div class="alert info">窗口隐藏时坐标类输入（<code>mouse_wheel</code> / <code>touch_*</code>）会自动临时显示窗口并重试一次（v3.3.2 起自愈，回包会标注），闲置 8 秒后自动收起；需要持续可见请先 <code>browser_show_window {visible:true}</code>。<code>mouse_move</code> 在后台可能变慢，属节流而非通道故障。</div>
 <h3>文档打不开</h3>
 <p>直接打开 exe 同目录 <code>docs/</code> 下的 Markdown 文件。程序不监听端口，不提供网页。</p>
 <h3>页面卡住 / MCP 超时</h3>

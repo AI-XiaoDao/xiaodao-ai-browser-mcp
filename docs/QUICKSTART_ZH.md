@@ -6,7 +6,7 @@
 
 ## 这是什么？
 
-**AI浏览器 MCP Server** 在 Windows 上运行真实 **Google Chromium（CEF）** 浏览器，通过 **Model Context Protocol（MCP）** 对外提供 **351 个工具**（其中 334 个 `browser_*`）。
+**AI浏览器 MCP Server** 在 Windows 上运行真实 **Google Chromium（CEF）** 浏览器，通过 **Model Context Protocol（MCP）** 对外提供 **351 个工具**（其中 336 个 `browser_*`）。
 
 无需手写 **Playwright / Puppeteer** 脚本 — 在 Cursor 里用**一条指令**完成：**网页数据采集**、**POST 逆向 Hook**、**CDP 断点定位 sign 算法**、**自动填表 RPA**。
 

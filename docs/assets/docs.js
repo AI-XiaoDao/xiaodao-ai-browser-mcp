@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var MCP = { version: '3.3.6' };
+var MCP = { version: '3.3.6' };
 
   // 标准 MCP over stdio 接入: 命令填 exe 路径, 参数 --mcp-stdio; 不涉及端口/HTTP
   // ⚠ v3.3.2: 这里**故意不写死任何路径**。本常量会被 applyStatic() 渲染进页面上的

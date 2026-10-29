@@ -4,7 +4,7 @@
 
 ## What is this?
 
-**AI Browser MCP Server** (AI浏览器 MCP) exposes a real **Google Chromium (CEF)** browser on Windows via the **Model Context Protocol (MCP)**. Instead of writing **Playwright** or **Puppeteer** scripts, your AI agent calls **351 ready-made MCP tools** (334 named `browser_*`, the rest are `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` helpers) over **stdio**.
+**AI Browser MCP Server** (AI浏览器 MCP) exposes a real **Google Chromium (CEF)** browser on Windows via the **Model Context Protocol (MCP)**. Instead of writing **Playwright** or **Puppeteer** scripts, your AI agent calls **351 ready-made MCP tools** (336 named `browser_*`, the rest are `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` helpers) over **stdio**.
 
 **One instruction → auto-run:** web scraping · reverse POST fields · locate sign algorithms with the CDP debugger · form automation.
 
