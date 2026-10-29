@@ -43,6 +43,9 @@ jobs:
 
   # 行为回归：下载 x64 成品跑协议套件（advisory，待 CI 稳定后再转为必需）
   behaviour:
+    # GitHub-hosted runners have no interactive desktop; CEF cannot create a browser.
+    # Enable with repository variable ENABLE_BEHAVIOUR=1 on a self-hosted runner.
+    if: vars.ENABLE_BEHAVIOUR == '1'
     runs-on: windows-latest
     needs: checksums
     timeout-minutes: 12
