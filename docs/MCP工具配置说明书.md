@@ -178,7 +178,7 @@ AI-Fbowser-Mcp.exe --print-config > mcp.json
 | 字段 | 类型 | 默认 | 说明 |
 |------|------|------|------|
 | `rate_limit_per_minute` | int | `0` | 每分钟请求上限。`0` = 不限速（随包默认，本地桌面无需限速）；`>0` 时超限请求会被拒，返回错误码 `-32000`「请求过于频繁」并附 `Retry-After` 秒数。**它不是历史遗留键，改动确实生效** |
-| `tool_profile` | string | `"all"` | **v3.3.4 新增**：控制 `tools/list` 暴露面，直接降低每次会话的上下文 token。`all` = 全部工具（兼容旧行为）；`core` = 日常浏览器自动化（约 100 个）；`reverse` = 核心 + 逆向/指纹/网络；`debug` = 核心 + 调试/内核/逆向。只裁剪列表，隐藏工具仍可被显式调用。改后需重启进程 |
+| `tool_profile` | string | `"all"` | **v3.3.4 新增**：控制 `tools/list` 暴露面，直接降低每次会话的上下文 token。`all` = 全部工具（351 个 / tools-list 实测约 172KB，兼容旧行为）；`core` = 日常浏览器自动化（实测 97 个 / 约 50KB，降约 70%）；`reverse` = 核心 + 逆向/指纹/网络；`debug` = 核心 + 调试/内核/逆向。只裁剪列表，隐藏工具仍可被显式调用。改后需重启进程 |
 | `allow_cloud_metadata_endpoints` | bool | `false` | **v3.3.4 新增**：默认拒绝云元数据端点（`169.254.169.254` / `metadata.google.internal` / `metadata.azure.com`），降低 SSRF 读取实例凭据的风险；本地/内网其它地址仍放行。确需访问时显式设 `true`。改后需重启进程 |
 
 ### 4.4 早期 HTTP 模式的遗留字段（读取但**不产生任何实际作用**）

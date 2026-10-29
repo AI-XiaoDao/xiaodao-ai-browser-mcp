@@ -1,4 +1,8 @@
 Xiaodao AI-Browser MCP Server v3.3.6 (x64)
+Build date: 2026-10-29
 Tool count: 351
-EXE MD5: 91A89AC371493B03D37BFD3476B879F4
-Full runtime package: GitHub Releases v3.3.6
+EXE MD5: 5D1BF75EC36B19E0127AA7DF181358FE
+EXE SHA256: 7515F8C8D66197AB64A284EC3913125C5FF8658DEDBC9A5D84E05224B904B980
+
+Run: AI-Fbowser-Mcp.exe --print-config
+Full package includes CEF runtime, locales, docs, assets and workflows.

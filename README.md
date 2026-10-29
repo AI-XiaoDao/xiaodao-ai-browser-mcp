@@ -28,8 +28,8 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 ## 快速下载 / Quick download
 | 系统 | 选择 | 包内内容 |
 |---|---|---|
-| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo |
-| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo |
+| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo + 用户手册 |
+| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册 |
 
 不要混用两个包：CEF、sqlite 与原生 DLL 都有位数要求。
 
@@ -46,7 +46,7 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 | 变量 | 作用 |
 |---|---|
 | `AI_BROWSER_MCP_STDERR_UTF8=1` | 把日志(stderr)编码从默认 **936/GBK** 切到 **UTF-8**（`true/yes/on` 亦可）。默认 GBK 与中文 Windows 控制台一致，**完全向后兼容**；非中文 Windows 或期望 UTF-8 日志时置此变量。 |
-| `AI_BROWSER_MCP_TOOLS_DIR` | 工具目录（一般无需手工设置，安装器会写） |
+| `AI_BROWSER_MCP_TOOLS_DIR` | 工具目录（一般无需手工设置） |
 
 > 实测：同一构建，UTF-8 模式下按 UTF-8 解码替换符 **0** 个；不置变量时按 GBK 解码替换符 **6** 个。
 > 另查实：默认模式 stderr 为**混合编码**（项目日志 GBK + CEF 子进程 UTF-8）⇒ 置变量后整条流统一 UTF-8。
@@ -54,15 +54,15 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + 用户手册；170,222,276 B；内层 exe MD5 `91A89AC371493B03D37BFD3476B879F4`，9,859,584 B） |
-| `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + 用户手册；147,361,476 B；内层 exe MD5 `1D935680DB23FFD11B33CC82ED4924DF`，8,166,400 B） |
+| `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + Logo + 用户手册；170,216,669 B；内层 exe MD5 `5D1BF75EC36B19E0127AA7DF181358FE`，9,860,096 B） |
+| `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；147,352,411 B；内层 exe MD5 `90D03B329DF924EA49903E2FA52685DA`，8,166,912 B） |
 | `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
 `v3.3.6` 最终构建：x64 / x86 均为 **0 错误、0 警告**。
 
-- 本轮 `matrix` 客户端矩阵 **7/7 通过**，`transport` **3/3 通过**，`tools/list` 实测 **351** 个工具。
-- 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构，客户端覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。
+- 协议级客户端矩阵基线 **7/7**、`transport` **3/3**（2026-09-19 实测；套件随仓发布，可复跑），当前构建 `tools/list` 实测 **351** 个工具。
+- 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构；接入说明覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。真实 GUI 客户端需按各自环境用 `--print-config` 实测。
 - CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；v3.3.6 变更见 [CHANGELOG-v3.3.6.md](CHANGELOG-v3.3.6.md)；v3.3.4 审计档案见 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
 
 ## 已知边界 / Known limits
