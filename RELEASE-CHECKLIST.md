@@ -16,7 +16,7 @@
 
 ## 2. 回归（对**副本**跑，不要对着正在服务的运行目录 —— 套件会清理 `mcp_cache.db*`）
 - [ ] `.\run-tests.ps1 -Exe <副本\AI-Fbowser-Mcp.exe> -Suite all` → **PASS**
-      - `sweep`：348/348 有回执，`no-reply = 0`、`bad-json = 0`
+      - `sweep`：351/351 有回执，`no-reply = 0`、`bad-json = 0`
       - `frames`：P1–P8 全过（CL / 裸行 / 管线化 / 帧体空白 / 字面量 `Content-Length:` / NUL → -32700 / CL 失配两向）
       - `transport`：A/B/C 全过（CL 声明小于、大于实际均不永久挂起）
       - `pool`：饱和期 `tools/list` **< 1000ms**（修前实测 11267ms）、`ping` 快答、第 4 条 `tools/call` 不被静默排队

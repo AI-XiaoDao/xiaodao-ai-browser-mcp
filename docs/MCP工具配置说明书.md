@@ -1,6 +1,6 @@
-# AI浏览器 MCP Server v3.3.4 — 配置说明书
+# AI浏览器 MCP Server v3.3.6 — 配置说明书
 
-> Windows 平台 · 内置 Google Chromium（CEF）浏览器 · 提供 **348 个工具**（其中 334 个 `browser_*`，另 14 个是 `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` 等管理工具）
+> Windows 平台 · 内置 Google Chromium（CEF）浏览器 · 提供 **351 个工具**（其中 336 个 `browser_*`，另 15 个是 `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` 等管理工具）
 > **仅 stdio 通道**：程序不监听任何端口，**没有在线文档与健康检查接口**（不存在 HTTP / WebSocket 端点、不存在 `/health`），启动时控制台会打印「仅 stdio 通道, 不监听任何端口」。（exe 同目录的 `index.html` 是随包的**本地离线**欢迎页，由程序用 `file://` 直接打开，不经网络提供、也不对外提供任何接口）
 > **浏览器窗口默认隐藏、不占桌面**（v3.3.2 起）：由 MCP 客户端拉起后主窗口创建完即隐藏；需要时用 `browser_show_window {visible:true}` 显示，或加命令行开关 `--visible`。
 > 本程序由 MCP 客户端自动拉起，**不是双击就用的桌面程序**；双击只用来查看版权信息与按本机路径生成的客户端配置（本版**免费发布，无需激活**）。
@@ -46,8 +46,8 @@ AI-Fbowser-Mcp.exe --print-config > mcp.json
 
 ### ③ 重启客户端并确认
 
-重启 MCP 客户端后，让 AI 调用 `mcp_help`（不带参数），能看到 348 个工具的清单即为接入成功。
-（`mcp_tools_list` 列的是 `mcp-tools\` 扩展目录里的**外部**工具，与这 348 个内置工具无关，别拿它做接入验证。）
+重启 MCP 客户端后，让 AI 调用 `mcp_help`（不带参数），能看到 351 个工具的清单即为接入成功。
+（`mcp_tools_list` 列的是 `mcp-tools\` 扩展目录里的**外部**工具，与这 351 个内置工具无关，别拿它做接入验证。）
 
 ---
 
@@ -216,7 +216,7 @@ AI-Fbowser-Mcp.exe --print-config > mcp.json
 | `browser_id` | 多浏览器时指定目标浏览器 |
 
 - 工具名双路由：`browser_navigate` ≡ `browser.navigate`。
-- 工具总数为 **348**（334 个 `browser_*` + 14 个管理类）。查清单用 `mcp_help`；`mcp_tools_list` / `mcp_tools_set` 管的是 `mcp-tools\` 扩展目录里的外部工具，不是这 348 个。
+- 工具总数为 **351**（336 个 `browser_*` + 15 个管理类）。查清单用 `mcp_help`；`mcp_tools_list` / `mcp_tools_set` 管的是 `mcp-tools\` 扩展目录里的外部工具，不是这 351 个。
 - 超大内容（整段二进制、大请求体）不要塞进 `arguments`，改用文件类参数，例如 `browser_create_url_request {body_file:"D:\\path\\big.bin"}`。
 
 ---

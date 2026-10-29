@@ -1,12 +1,12 @@
 # AI浏览器 MCP — 中文快速上手
 
-> **Windows 本地浏览器自动化 MCP 服务器** — 348 个工具，支持 Cursor、Claude Desktop、Cline 及任意 MCP 客户端。
+> **Windows 本地浏览器自动化 MCP 服务器** — 351 个工具，支持 Cursor、Claude Desktop、Cline 及任意 MCP 客户端。
 >
 > 零基础用户请看：[快速使用指南](快速使用指南.md)（3 分钟上手）
 
 ## 这是什么？
 
-**AI浏览器 MCP Server** 在 Windows 上运行真实 **Google Chromium（CEF）** 浏览器，通过 **Model Context Protocol（MCP）** 对外提供 **348 个工具**（其中 334 个 `browser_*`）。
+**AI浏览器 MCP Server** 在 Windows 上运行真实 **Google Chromium（CEF）** 浏览器，通过 **Model Context Protocol（MCP）** 对外提供 **351 个工具**（其中 334 个 `browser_*`）。
 
 无需手写 **Playwright / Puppeteer** 脚本 — 在 Cursor 里用**一条指令**完成：**网页数据采集**、**POST 逆向 Hook**、**CDP 断点定位 sign 算法**、**自动填表 RPA**。
 
@@ -59,7 +59,7 @@
 | | 自建 Playwright | AI浏览器 MCP |
 |--|----------------|--------------|
 | 上手 | 写脚本、装环境 | 下载 exe + 三步接入 |
-| AI | Agent 现写代码 | **348 个预封装 MCP 工具** |
+| AI | Agent 现写代码 | **351 个预封装 MCP 工具** |
 | 逆向 | 手动 Hook | `browser_inject` + 场景脚本 |
 | 隐私 | 视部署 | **纯本地，不开任何端口** |
 

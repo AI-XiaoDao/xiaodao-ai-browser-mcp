@@ -1,14 +1,14 @@
 # 能力清单 / Capabilities
 
-**工具总数：349**（由发布版二进制 `tools/list` **实际导出**，非人工罗列）。
+**工具总数：351**（由发布版二进制 `tools/list` **实际导出**，非人工罗列）。
 
 ## 按域统计（实测计数，仅列 ≥3 个工具的域）
 | 域（工具名前缀） | 数量 |
 |---|---:|
-| `browser_vip_*` | 56 |
+| `browser_vip_*` | 57 |
 | `browser_reverse_*` | 55 |
 | `browser_get_*` | 20 |
-| `browser_fingerprint_*` | 19 |
+| `browser_fingerprint_*` | 20 |
 | `browser_kernel_*` | 17 |
 | `browser_debugger_*` | 17 |
 | `browser_fill_*` | 12 |
@@ -27,7 +27,7 @@
 | `browser_clear_*` | 3 |
 | `browser_create_*` | 3 |
 
-## 全量工具名（字母序，349 个）
+## 全量工具名（字母序，351 个）
 ```
 aliases
 aliases=1
@@ -175,9 +175,10 @@ browser_fingerprint_product_sub
 browser_fingerprint_screen_xy
 browser_fingerprint_touch_enable
 browser_fingerprint_ua
+browser_fingerprint_uach
 browser_fingerprint_vendor_sub
 browser_fingerprint_webgl_vendor
-browser_fingerprint=19
+browser_fingerprint=20
 browser_font_randomize
 browser_font=1
 browser_forward
@@ -407,6 +408,7 @@ browser_vip_enable_inspector
 browser_vip_enable_js_env
 browser_vip_execute_js_context
 browser_vip_extension_info
+browser_vip_extension_list
 browser_vip_filter_patch_text
 browser_vip_filter_replace_data
 browser_vip_filter_replace_file
@@ -452,7 +454,7 @@ browser_vip_touch_cancel
 browser_vip_touch_emulation
 browser_vip_unload_extension
 browser_vip_websocket_intercept
-browser_vip=56
+browser_vip=57
 browser_wait
 browser_wait=1
 browser_window_info

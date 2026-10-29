@@ -13,4 +13,4 @@ AI-generated text so product claims, version numbers, hashes and architecture la
 | `xiaodao-mcp-x64-x86.png` | Dual-architecture card | 1200x1200 |
 | `xiaodao-mcp-industry-poster.png` | Use-case / industry poster | 1200x1800 |
 
-Keep `v3.3.4`, `349 tools`, `x64 + x86` and the stdio-only statement consistent when replacing these assets.
+Keep `v3.3.6`, `351 tools`, `x64 + x86` and the stdio-only statement consistent when replacing these assets.

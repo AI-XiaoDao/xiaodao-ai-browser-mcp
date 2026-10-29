@@ -63,11 +63,11 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 
 - 本轮 `matrix` 客户端矩阵 **7/7 通过**，`transport` **3/3 通过**，`tools/list` 实测 **351** 个工具。
 - 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构，客户端覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。
-- CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；完整审计证据保留在 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
+- CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；v3.3.6 变更见 [CHANGELOG-v3.3.6.md](CHANGELOG-v3.3.6.md)；v3.3.4 审计档案见 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
 
 ## 已知边界 / Known limits
 
-完整审计报告与证据：**[docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)**
+完整 v3.3.4 审计档案（历史）：**[docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)**
 
 - exe **未做代码签名**（SmartScreen 会提示）· no code signing yet
 - 缓存库"内容型"毒化触发条件不可构造，仅有启发式安全网 · cache-DB content-poisoning has no reproducible trigger (heuristic net only)

@@ -1,10 +1,10 @@
 # AI Browser MCP — Quick Start (English)
 
-> **Windows local browser automation MCP server** — 348 tools for Cursor, Claude Desktop, Cline, or any MCP client.
+> **Windows local browser automation MCP server** — 351 tools for Cursor, Claude Desktop, Cline, or any MCP client.
 
 ## What is this?
 
-**AI Browser MCP Server** (AI浏览器 MCP) exposes a real **Google Chromium (CEF)** browser on Windows via the **Model Context Protocol (MCP)**. Instead of writing **Playwright** or **Puppeteer** scripts, your AI agent calls **348 ready-made MCP tools** (334 named `browser_*`, the rest are `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` helpers) over **stdio**.
+**AI Browser MCP Server** (AI浏览器 MCP) exposes a real **Google Chromium (CEF)** browser on Windows via the **Model Context Protocol (MCP)**. Instead of writing **Playwright** or **Puppeteer** scripts, your AI agent calls **351 ready-made MCP tools** (334 named `browser_*`, the rest are `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` helpers) over **stdio**.
 
 **One instruction → auto-run:** web scraping · reverse POST fields · locate sign algorithms with the CDP debugger · form automation.
 
@@ -61,7 +61,7 @@ Log in with user test / pass 124356, go to order list, export first 20 rows as a
 | | Playwright DIY | AI Browser MCP |
 |--|----------------|----------------|
 | Setup | Node + drivers + scripts | Download exe + 3-step setup |
-| AI | Agent writes code each time | **348 MCP tools** pre-built |
+| AI | Agent writes code each time | **351 MCP tools** pre-built |
 | Reverse / debug | Manual Hook + DevTools | Built-in inject + **CDP debugger** |
 | Privacy | Varies | **Fully local, opens no ports** |
 

@@ -24,7 +24,7 @@ node tests\mcp-suite.mjs --exe <exe> --suite all --large-wait 25000
 | `transport` | 基线三连发；CL 声明**小于**/**大于**实际 两向均不永久挂起 |
 | `pool` | 工作池饱和：3 条长工具占满后，`tools/list` 读线程快答（<1000ms）、`ping` 快答、第 4 条 `tools/call` 不被静默排队 |
 | `cdp` | CDP 层诚实性：不可序列化值**如实回报**且注明"不会回退重跑"，紧随的正常表达式仍走 CDP（通道未被判死） |
-| `matrix` | 客户端兼容矩阵：CL(CRLF) / CL(仅 LF) / 裸行 三种帧风格 × 协议版本(2024-11-05 / 2025-06-18 / 伪造版本) × 丰富握手(capabilities/roots/sampling)，每种都要求握手 + tools/list(348) + 真实工具调用成功 |
+| `matrix` | 客户端兼容矩阵：CL(CRLF) / CL(仅 LF) / 裸行 三种帧风格 × 协议版本(2024-11-05 / 2025-06-18 / 伪造版本) × 丰富握手(capabilities/roots/sampling)，每种都要求握手 + tools/list(351) + 真实工具调用成功 |
 | `soak` | 浸泡 + 资源曲线（`--minutes`，默认 5）：6 种作业轮转 + 每 15s 采样工作集/私有字节/句柄/线程，断言无明显单调增长、无回包为 0、结束仍存活 |
 
 ## 三个必须知道的坑（都是踩过的）
