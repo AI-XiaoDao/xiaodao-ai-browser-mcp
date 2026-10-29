@@ -54,8 +54,8 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库与 Logo；172,626,136 B；内层 exe MD5 `91A89AC371493B03D37BFD3476B879F4`，9,859,584 B） |
-| `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库与 Logo；149,765,336 B；内层 exe MD5 `1D935680DB23FFD11B33CC82ED4924DF`，8,166,400 B） |
+| `xiaodao-ai-browser-mcp-v3.3.6-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + 用户手册；170,222,276 B；内层 exe MD5 `91A89AC371493B03D37BFD3476B879F4`，9,859,584 B） |
+| `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + 用户手册；147,361,476 B；内层 exe MD5 `1D935680DB23FFD11B33CC82ED4924DF`，8,166,400 B） |
 | `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
