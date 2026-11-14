@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/logo.png" width="96" alt="Xiaodao AI-Browser MCP logo"></p>
+﻿<p align="center"><img src="assets/logo.png" width="96" alt="Xiaodao AI-Browser MCP logo"></p>
 <p align="center"><img src="assets/promo/xiaodao-mcp-banner-1200x630.png" alt="Xiaodao AI-Browser MCP Server — Windows browser automation MCP server with 351 tools, Chromium/CEF kernel, stdio transport" width="100%"></p>
 
 **Xiaodao AI-Browser MCP Server（小刀 AI 浏览器 MCP 服务端）** is a local **browser automation MCP server for Windows** built on the **Chromium / CEF** kernel. It speaks **MCP over stdio** (no ports, no daemon) and exposes **351 tools** covering navigation, extraction, form filling, screenshots/PDF, **network capture & HAR export**, **Chrome DevTools Protocol (CDP)** control, **JavaScript debugging & reverse engineering** (function hooks, hot patching, precise coverage, obfuscation detection), **anti-detect fingerprinting**, and **kernel-level CEF events**.
@@ -23,13 +23,13 @@
 Windows 本地浏览器自动化 MCP 服务端 —— **Google Chromium / CEF** 内核、仅 stdio 通道（`--mcp-stdio`）、**351** 个工具。
 A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351 tools).
 
-**最新版本 / Latest: `v3.3.7`** → 见 [Releases](../../releases)。本仓发布成品；源码维护在 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
+**最新版本 / Latest: `v3.3.8`** → 见 [Releases](../../releases)。本仓发布成品；源码维护在 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
 
 ## 快速下载 / Quick download
 | 系统 | 选择 | 包内内容 |
 |---|---|---|
-| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.7-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo + 用户手册 |
-| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.7-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册 |
+| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.8-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo + 用户手册 |
+| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.8-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册 |
 
 不要混用两个包：CEF、sqlite 与原生 DLL 都有位数要求。
 
@@ -54,16 +54,16 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.7-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + Logo + 用户手册；166,171,238 B；内层 exe MD5 `2CE57BEA113C5CFEC6A845F598D727B0`，10,492,928 B） |
-| `xiaodao-ai-browser-mcp-v3.3.7-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；143,784,053 B；内层 exe MD5 `F6AFC84286DD33CD9391F10DD5CE3941`，8,663,552 B） |
+| `xiaodao-ai-browser-mcp-v3.3.8-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + Logo + 用户手册；167,954,765 B；内层 exe MD5 `534AEF4CE157216626BC322FBC23FF10`，10,504,192 B） |
+| `xiaodao-ai-browser-mcp-v3.3.8-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；145,898,523 B；内层 exe MD5 `4300CCC5F28E84739E374307DCBD3597`，8,673,280 B） |
 | `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-`v3.3.7` 最终构建：x64 与 x86 均为 **0 错误、0 警告**；x86 全量 sweep 351/351 通过。
+`v3.3.8` 最终构建：x64 与 x86 均为 **0 错误、0 警告**；x86 全量 sweep 351/351 通过。v3.3.8 修复参数闸门误拒并新增 `[TOOLFAIL]` 失败日志。
 
 - 协议级客户端矩阵基线 **7/7**、`transport` **3/3**（2026-09-19 实测；套件随仓发布，可复跑），当前构建 `tools/list` 实测 **351** 个工具。
 - 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构；接入说明覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。真实 GUI 客户端需按各自环境用 `--print-config` 实测。
-- CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；v3.3.7 变更见 [CHANGELOG-v3.3.7.md](CHANGELOG-v3.3.7.md)，v3.3.6 见 [CHANGELOG-v3.3.6.md](CHANGELOG-v3.3.6.md)；v3.3.4 审计档案见 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
+- CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；v3.3.8 变更见 [CHANGELOG-v3.3.8.md](CHANGELOG-v3.3.8.md)，v3.3.7 见 [CHANGELOG-v3.3.7.md](CHANGELOG-v3.3.7.md)，v3.3.6 见 [CHANGELOG-v3.3.6.md](CHANGELOG-v3.3.6.md)；v3.3.4 审计档案见 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
 
 ## 已知边界 / Known limits
 
@@ -79,8 +79,8 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 
 ```
 README.md                  本文件（中英双语）
-dist/x64/AI-Fbowser-Mcp.exe  v3.3.7 64 位 exe 本体
-dist/x86/AI-Fbowser-Mcp.exe  v3.3.7 32 位 exe 本体
+dist/x64/AI-Fbowser-Mcp.exe  v3.3.8 64 位 exe 本体
+dist/x86/AI-Fbowser-Mcp.exe  v3.3.8 32 位 exe 本体
 docs/QUICKSTART_ZH.md     快速上手（中文）
 docs/QUICKSTART_EN.md     Quick Start (English)
 docs/CHANGELOG.md         更新日志
