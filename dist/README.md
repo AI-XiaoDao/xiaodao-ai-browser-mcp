@@ -4,7 +4,7 @@
 完整可运行包（含 `libcef.dll`、`locales/`、`docs/`、`assets/`、`workflows/`）在 **GitHub Releases v3.3.7**：
 
 - `xiaodao-ai-browser-mcp-v3.3.7-x64.zip`（Windows 10/11 x64）
-- `xiaodao-ai-browser-mcp-v3.3.6-x86.zip`（Windows 10/11 x86，本轮未重建）
+- `xiaodao-ai-browser-mcp-v3.3.7-x86.zip`（Windows 10/11 x86）
 
 > `libcef.dll` 单文件超过 GitHub Git 树的 100MB 限制，因此完整运行库不进入 Git 历史，走 Release 资产分发。
 

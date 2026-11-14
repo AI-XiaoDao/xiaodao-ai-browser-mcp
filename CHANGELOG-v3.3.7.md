@@ -43,6 +43,23 @@ AI 调用语义、事件时间线可读性、Promise 求值、schema 一致性�
   周期清理；resource-cycle 实测无句柄增长（dHandles≈161）。
 - 全量门禁：351/351 工具回执、defect 0、valid-call 32/0、schema 0 FAIL、冷启动 <700ms。
 
+## x86 构建（本轮补齐）
+
+- 根因：`AI-Fbowser-Mcp.vprj` 缺少 `target_platform`，火山视窗默认按 64 位编译，
+  导致 `dist/x86` 长期停留在 v3.3.6。
+- 修复：工程属性显式 `target_platform = 0`（64 位）；32 位构建临时切 `1`，
+  产物路径 `_int\AI-Fbowser-Mcp\release\win32\linker\AI-Fbowser-Mcp.exe`。
+- 结果：x86 `8,663,552` 字节 / MD5 `F6AFC84286DD33CD9391F10DD5CE3941` /
+  SHA256 `899D3278FB8EDA8E1E3DE72ADDA8AFE674F401D967113D76CDC009AD23902C86`，
+  FileVersion / ProductVersion 均为 3.3.7，编译 0 警告 0 错误。
+- 验证：351/351 工具回执（ok 164 / usage 186 / expected-reject 0 / defect 0 /
+  unclassified 0），schema BAD=0，冷启动约 612ms，`isError=false`。
+- 发布包：`xiaodao-ai-browser-mcp-v3.3.7-x86.zip`（110 文件，143,784,053 字节，
+  SHA256 `7DDFA840DDD776B46688B430008908893FEB488928F9876C7027DE659B6D2ADD`，
+  MD5 `E5BC8E092D7EE4F17DFC3AD5DD5B2197`）。
+- 打包清洗：已剔除测试运行产生的 `CacheData/`、`mcp_cache.db*`、`mcp_console.log`、
+  `log.txt`，压缩包内 BAD=0。
+
 ## 升级说明
 
 - 直接替换 `AI-Fbowser-Mcp.exe`；若同时升级 CEF 运行库，必须整套替换

@@ -29,7 +29,7 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 | 系统 | 选择 | 包内内容 |
 |---|---|---|
 | 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.7-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo + 用户手册 |
-| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册（x86 本轮未重建） |
+| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.7-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册 |
 
 不要混用两个包：CEF、sqlite 与原生 DLL 都有位数要求。
 
@@ -55,11 +55,11 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 | 文件 | 说明 |
 |---|---|
 | `xiaodao-ai-browser-mcp-v3.3.7-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + Logo + 用户手册；166,171,238 B；内层 exe MD5 `2CE57BEA113C5CFEC6A845F598D727B0`，10,492,928 B） |
-| `xiaodao-ai-browser-mcp-v3.3.6-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；147,353,542 B；内层 exe MD5 `90D03B329DF924EA49903E2FA52685DA`，8,166,912 B） |
+| `xiaodao-ai-browser-mcp-v3.3.7-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；143,784,053 B；内层 exe MD5 `F6AFC84286DD33CD9391F10DD5CE3941`，8,663,552 B） |
 | `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-`v3.3.7` 最终构建：x64 为 **0 错误、0 警告**；x86 仍为 v3.3.6（本轮未重建）。
+`v3.3.7` 最终构建：x64 与 x86 均为 **0 错误、0 警告**；x86 全量 sweep 351/351 通过。
 
 - 协议级客户端矩阵基线 **7/7**、`transport` **3/3**（2026-09-19 实测；套件随仓发布，可复跑），当前构建 `tools/list` 实测 **351** 个工具。
 - 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构；接入说明覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。真实 GUI 客户端需按各自环境用 `--print-config` 实测。
@@ -80,7 +80,7 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 ```
 README.md                  本文件（中英双语）
 dist/x64/AI-Fbowser-Mcp.exe  v3.3.7 64 位 exe 本体
-dist/x86/AI-Fbowser-Mcp.exe  v3.3.6 32 位 exe 本体（本轮未重建）
+dist/x86/AI-Fbowser-Mcp.exe  v3.3.7 32 位 exe 本体
 docs/QUICKSTART_ZH.md     快速上手（中文）
 docs/QUICKSTART_EN.md     Quick Start (English)
 docs/CHANGELOG.md         更新日志
