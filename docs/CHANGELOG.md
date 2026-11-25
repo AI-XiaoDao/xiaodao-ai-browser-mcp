@@ -1,5 +1,17 @@
 # 更新日志 / Changelog
 
+## v3.3.9 (2026-11-25)
+**CDP 假故障与多浏览器可用性修复。** 完整说明见 [CHANGELOG-v3.3.9.md](../CHANGELOG-v3.3.9.md)。
+- `取CDP通道健康()` 仅在探测失败后的 5s 冷却期返回假；空闲 >60s 不再判死，空闲不再压缩调用方预算
+- 卡死标记窗口 10min → 1min、预算下限 2s → 5s；`cdp_cooldown_remaining_ms` 统一按 5s 计算
+- 多浏览器 CDP 改用原始 `开发者消息_发送消息` + 自有 id；新增 `CDP切换锁` 串行注销/重附着
+- 400K CDP 封顶前移，截图二级降级 `jpeg40/960×540`；base64 >480K 自动落盘 `shots/`
+- 非 JS 超时不再发 `Runtime.terminateExecution`；`browser_evaluate` schema 补 `async_only`
+- stdio 双实例缓存隔离 `GlobalData_Stdio_<pid>`
+- 回归：x64 `sweep` 351/351、`frames` 10/10、`cdp` 4/4；x86 完整包 `sweep` 351/351、`cdp` 4/4
+
+v3.3.5–v3.3.8 详见根目录 [CHANGELOG-v3.3.6.md](../CHANGELOG-v3.3.6.md)、[CHANGELOG-v3.3.7.md](../CHANGELOG-v3.3.7.md)、[CHANGELOG-v3.3.8.md](../CHANGELOG-v3.3.8.md)。
+
 ## v3.3.4 (2026-10-19)
 **商业级审计修复 + Logo + Token 优化。**
 - 版本号/工程版本/exe 版本统一升级到 3.3.4；新增程序图标 `assets/logo.ico`（16–256 多尺寸）

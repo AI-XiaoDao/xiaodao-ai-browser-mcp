@@ -4,7 +4,7 @@
 
 | 组件 | 版本（实测来源） | 用途 | 许可提示 |
 |---|---|---|---|
-| 小刀 AI 浏览器 MCP Server | 3.3.6（ping 返回 version） | 主程序 | 专有（见 LICENSE） |
+| 小刀 AI 浏览器 MCP Server | 3.3.9（ping 返回 version） | 主程序 | 专有（见 LICENSE） |
 | Chromium Embedded Framework (CEF) | `135.0.7049.115`（chrome_elf.dll VersionInfo）／`135.0.21+gd008a99+chromium-135.0.7049.115`（libcef.dll VersionInfo） | 浏览器内核 | BSD-3-Clause（Chromium/CEF 各自条款） |
 | FBrowser 火山模块（CEFLib 封装） | 随成品包提供（x64/x86 两套运行库） | 火山工程与 CEF 的桥接 | 第三方类库，按作者授权 |
 | SQLite | `sqlite3dllmt.dll`（随包，w_sqlite3 封装） | 缓存库/异步结果 | Public Domain |

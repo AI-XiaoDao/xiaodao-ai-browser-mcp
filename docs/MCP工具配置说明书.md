@@ -1,4 +1,4 @@
-# AI浏览器 MCP Server v3.3.6 — 配置说明书
+# AI浏览器 MCP Server v3.3.9 — 配置说明书
 
 > Windows 平台 · 内置 Google Chromium（CEF）浏览器 · 提供 **351 个工具**（其中 336 个 `browser_*`，另 15 个是 `mcp_*` / `workflow_*` / `ping` / `batch` / `schedule` / `aliases` 等管理工具）
 > **仅 stdio 通道**：程序不监听任何端口，**没有在线文档与健康检查接口**（不存在 HTTP / WebSocket 端点、不存在 `/health`），启动时控制台会打印「仅 stdio 通道, 不监听任何端口」。（exe 同目录的 `index.html` 是随包的**本地离线**欢迎页，由程序用 `file://` 直接打开，不经网络提供、也不对外提供任何接口）

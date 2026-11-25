@@ -23,13 +23,13 @@
 Windows 本地浏览器自动化 MCP 服务端 —— **Google Chromium / CEF** 内核、仅 stdio 通道（`--mcp-stdio`）、**351** 个工具。
 A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351 tools).
 
-**最新版本 / Latest: `v3.3.8`** → 见 [Releases](../../releases)。本仓发布成品；源码维护在 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
+**最新版本 / Latest: `v3.3.9`** → 见 [Releases](../../releases)。本仓发布成品；源码维护在 `AI-XiaoDao/xiaodao-ai-browser-mcp-src`。
 
 ## 快速下载 / Quick download
 | 系统 | 选择 | 包内内容 |
 |---|---|---|
-| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.8-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo + 用户手册 |
-| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.8-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册 |
+| 64 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.9-x64.zip` | 351 工具 + 完整 64 位 CEF 运行库 + Logo + 用户手册 |
+| 32 位 Windows 10/11 | `xiaodao-ai-browser-mcp-v3.3.9-x86.zip` | 351 工具 + 完整 32 位 CEF 运行库 + Logo + 用户手册 |
 
 不要混用两个包：CEF、sqlite 与原生 DLL 都有位数要求。
 
@@ -54,16 +54,16 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 ## 资产 / Release assets
 | 文件 | 说明 |
 |---|---|
-| `xiaodao-ai-browser-mcp-v3.3.8-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + Logo + 用户手册；167,954,765 B；内层 exe MD5 `534AEF4CE157216626BC322FBC23FF10`，10,504,192 B） |
-| `xiaodao-ai-browser-mcp-v3.3.8-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；145,898,523 B；内层 exe MD5 `4300CCC5F28E84739E374307DCBD3597`，8,673,280 B） |
+| `xiaodao-ai-browser-mcp-v3.3.9-x64.zip` | 64 位成品（351 工具，完整 CEF 运行库 + Logo + 用户手册；167,957,922 B；MD5 `B852AF39FBAA81F2700CB7936E532B1A`；内层 exe MD5 `8EFA43A354B13D42480D7BD4B053CE47`，10,509,824 B） |
+| `xiaodao-ai-browser-mcp-v3.3.9-x86.zip` | 32 位成品（351 工具，完整 32 位 CEF 运行库 + Logo + 用户手册；145,900,559 B；MD5 `8DB34E285EB8351CA1CBF902EDD68A50`；内层 exe MD5 `912CAA80DEB9A3F7AAA08493B179786C`，8,677,888 B） |
 | `00-checksums-sha256-md5.csv` | 全部发布资产的 MD5 + SHA256 |
 
 ## 验收（机对机） / Verification
-`v3.3.8` 最终构建：x64 与 x86 均为 **0 错误、0 警告**；x86 全量 sweep 351/351 通过。v3.3.8 修复参数闸门误拒并新增 `[TOOLFAIL]` 失败日志。
+`v3.3.9` 最终构建：x64 与 x86 均为 **0 错误、0 警告**；x64 `sweep` 351/351、`frames` 10/10、`cdp` 4/4；x86 完整运行库包 `sweep` 351/351、`cdp` 4/4。v3.3.9 专修 CDP 高报错率：空闲不再判死、失败标记窗口缩到 1 分钟、多浏览器安全切换附着、截图大载荷自动降级。
 
 - 协议级客户端矩阵基线 **7/7**、`transport` **3/3**（2026-09-19 实测；套件随仓发布，可复跑），当前构建 `tools/list` 实测 **351** 个工具。
 - 欢迎页已重构为“快速接入 / 核心能力 / 兼容性 / 关于”结构；接入说明覆盖 Cursor、Claude Desktop、Codex、Cline、Windsurf、Trae、Cherry Studio、Roo Code、DeepSeek Harness、WorkBuddy 等。真实 GUI 客户端需按各自环境用 `--print-config` 实测。
-- CDP 健康状态机已按 AI 调用节奏修复：重命令按方法给探测预算，失败冷却 30 秒，截图不再被 1.2 秒探测误杀；v3.3.8 变更见 [CHANGELOG-v3.3.8.md](CHANGELOG-v3.3.8.md)，v3.3.7 见 [CHANGELOG-v3.3.7.md](CHANGELOG-v3.3.7.md)，v3.3.6 见 [CHANGELOG-v3.3.6.md](CHANGELOG-v3.3.6.md)；v3.3.4 审计档案见 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
+- CDP 健康状态机已按 AI 调用节奏修复：仅探测失败后的 **5 秒冷却期**返回不可用，空闲（含 >60s）不再判死；调用方预算不再被压缩；卡死标记窗口 1 分钟；非 JS 超时不再误发 `Runtime.terminateExecution`。多浏览器 `browser_id` 切换走串行附着锁，x64 实测 1↔2 连续 3 轮、12 路交替并发全成功。v3.3.9 变更见 [CHANGELOG-v3.3.9.md](CHANGELOG-v3.3.9.md)，v3.3.8 见 [CHANGELOG-v3.3.8.md](CHANGELOG-v3.3.8.md)，v3.3.7 见 [CHANGELOG-v3.3.7.md](CHANGELOG-v3.3.7.md)；v3.3.4 审计档案见 [docs/AUDIT-3.3.4.md](docs/AUDIT-3.3.4.md)。
 
 ## 已知边界 / Known limits
 
@@ -79,8 +79,8 @@ A local browser-automation MCP server for Windows (Chromium/CEF, stdio-only, 351
 
 ```
 README.md                  本文件（中英双语）
-dist/x64/AI-Fbowser-Mcp.exe  v3.3.8 64 位 exe 本体
-dist/x86/AI-Fbowser-Mcp.exe  v3.3.8 32 位 exe 本体
+dist/x64/AI-Fbowser-Mcp.exe  v3.3.9 64 位 exe 本体
+dist/x86/AI-Fbowser-Mcp.exe  v3.3.9 32 位 exe 本体
 docs/QUICKSTART_ZH.md     快速上手（中文）
 docs/QUICKSTART_EN.md     Quick Start (English)
 docs/CHANGELOG.md         更新日志

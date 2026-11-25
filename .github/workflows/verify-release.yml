@@ -33,10 +33,17 @@ jobs:
           $rows = Import-Csv $csv.FullName -Encoding UTF8
           $bad = 0
           foreach ($row in $rows) {
-            $p = Join-Path 'dl' $row.File
-            if (-not (Test-Path $p)) { Write-Host "MISSING  $($row.File)"; $bad++; continue }
+            $name = $row.filename
+            if ([string]::IsNullOrWhiteSpace($name)) { $name = $row.File }
+            $want = $row.md5
+            if ([string]::IsNullOrWhiteSpace($want)) { $want = $row.MD5 }
+            if ([string]::IsNullOrWhiteSpace($name) -or [string]::IsNullOrWhiteSpace($want)) {
+              Write-Host "INVALID ROW: $($row.PSObject.Properties.Name -join ',')"; $bad++; continue
+            }
+            $p = Join-Path 'dl' $name
+            if (-not (Test-Path $p -PathType Leaf)) { Write-Host "MISSING  $name"; $bad++; continue }
             $h = (Get-FileHash $p -Algorithm MD5).Hash
-            if ($h -ne $row.MD5) { Write-Host "MISMATCH $($row.File)"; $bad++ } else { Write-Host "OK       $($row.File)" }
+            if ($h -ne $want.ToUpperInvariant()) { Write-Host "MISMATCH $name"; $bad++ } else { Write-Host "OK       $name" }
           }
           Write-Host "verified $($rows.Count) assets, failures=$bad"
           if ($bad -gt 0) { throw "$bad asset(s) failed verification" }
